@@ -1,46 +1,73 @@
 "use client";
-import { ExternalLink, Layers } from "lucide-react";
+import { ExternalLink, Globe, BarChart2, FileSearch } from "lucide-react";
 
+// ── REAL PROJECTS ONLY ────────────────────────────────────────────────────────
 const PROJECTS = [
   {
-    id: 1, featured: true,
-    title: "ClearBillAI",
-    category: "AI · Logistics · FinTech",
-    summary: "An AI-powered logistics billing audit platform that helps identify invoice discrepancies, overcharges, and contract mismatches faster. Reduces manual billing errors and saves hours of reconciliation work.",
-    stack: ["Python","AI/ML","Data Analysis","React","REST API"],
-    liveUrl: "https://clear-bill-ai.vercel.app",
-    gradFrom: "#1A1028", gradTo: "#0D0819",
-    accentColor: "#A78BFA",
-  },
-  {
-    id: 2, featured: false,
-    title: "LocalCraft Stores",
-    category: "Business Website",
-    summary: "A modern, mobile-first business website for a local handicrafts store. Includes product showcase, about page, and a contact form that drives WhatsApp inquiries.",
-    stack: ["Next.js","Tailwind CSS","Vercel"],
-    liveUrl: null,
-    gradFrom: "#1A120A", gradTo: "#0D0907",
+    id: 1,
+    icon: Globe,
+    tag: "Web Development",
+    title: "Websites Built",
+    summary:
+      "Clean, fast, mobile-first websites for businesses, freelancers, and personal brands. Built with modern tools and AI-assisted development to deliver results faster and smarter.",
+    details: [
+      "Business & service websites",
+      "Personal portfolio sites",
+      "Landing pages & lead generation",
+      "Mobile-first, fully responsive",
+      "SEO basics included",
+    ],
+    stack: ["Next.js", "React", "Tailwind CSS", "Vercel", "AI-Assisted"],
     accentColor: "#F97316",
+    gradFrom: "rgba(249,115,22,0.12)",
+    gradTo:   "rgba(249,115,22,0.03)",
+    borderColor: "rgba(249,115,22,0.25)",
+    cta: { label: "Get Your Website Built", href: "#contact" },
+    featured: true,
   },
   {
-    id: 3, featured: false,
-    title: "FreelanceHub Portfolio",
-    category: "Portfolio Website",
-    summary: "A clean, minimal portfolio website built for a content writer. Showcases writing samples, testimonials, and a contact form optimized for getting more client inquiries.",
-    stack: ["React","Tailwind CSS","Netlify"],
-    liveUrl: null,
-    gradFrom: "#0A1A17", gradTo: "#070D0B",
-    accentColor: "#34D399",
-  },
-  {
-    id: 4, featured: false,
-    title: "Sales Performance Dashboard",
-    category: "Data · Business Intelligence",
-    summary: "A Power BI dashboard built for a small retail business to track monthly sales, top-performing products, and regional performance.",
-    stack: ["Power BI","Excel","SQL","DAX"],
-    liveUrl: null,
-    gradFrom: "#0A0D1A", gradTo: "#07080D",
+    id: 2,
+    icon: BarChart2,
+    tag: "Data & BI",
+    title: "Dashboards Created",
+    summary:
+      "Business intelligence dashboards built in Power BI and Python that turn raw data into clear, actionable insights — helping small businesses track performance without complexity.",
+    details: [
+      "Power BI dashboard design",
+      "Sales & revenue tracking",
+      "Custom KPI reporting",
+      "Excel & SQL data pipelines",
+      "Business-friendly visuals",
+    ],
+    stack: ["Power BI", "Python", "SQL", "Excel", "DAX"],
     accentColor: "#60A5FA",
+    gradFrom: "rgba(96,165,250,0.10)",
+    gradTo:   "rgba(96,165,250,0.02)",
+    borderColor: "rgba(96,165,250,0.20)",
+    cta: { label: "Discuss a Dashboard", href: "#contact" },
+    featured: false,
+  },
+  {
+    id: 3,
+    icon: FileSearch,
+    tag: "AI · Logistics · FinTech",
+    title: "ClearBillAI — Logistics Overcharge Detection",
+    summary:
+      "An AI-powered logistics billing audit platform that identifies invoice discrepancies, overcharges, and contract mismatches faster than manual review — saving businesses time and money.",
+    details: [
+      "AI-driven invoice analysis",
+      "Overcharge & discrepancy detection",
+      "Contract vs. billed rate comparison",
+      "Automated audit reports",
+      "Faster reconciliation workflow",
+    ],
+    stack: ["Python", "AI / ML", "Data Analysis", "React", "REST API"],
+    accentColor: "#A78BFA",
+    gradFrom: "rgba(167,139,250,0.10)",
+    gradTo:   "rgba(167,139,250,0.02)",
+    borderColor: "rgba(167,139,250,0.22)",
+    cta: { label: "View Live Project", href: "https://clear-bill-ai.vercel.app", external: true },
+    featured: false,
   },
 ];
 
@@ -48,133 +75,149 @@ export default function Projects() {
   return (
     <section id="projects" className="section-padding" style={{ background:"#0D0D1A" }}>
       <div className="container-max">
+
+        {/* Header */}
         <div style={{ textAlign:"center", maxWidth:600, margin:"0 auto 56px" }}>
-          <span className="section-label">Featured Work</span>
-          <h2 style={{ fontFamily:"'Sora',sans-serif", fontWeight:800,
-            fontSize:"clamp(28px,3.5vw,42px)", color:"#FFFFFF", marginBottom:14, lineHeight:1.2 }}>
-            Projects I've Built
+          <span className="section-label">What I've Built</span>
+          <h2 style={{
+            fontFamily:"'Sora',sans-serif", fontWeight:800,
+            fontSize:"clamp(28px,3.5vw,42px)", color:"#FFFFFF",
+            marginBottom:14, lineHeight:1.2,
+          }}>
+            Real Work. Real Results.
           </h2>
-          <p style={{ color:"rgba(255,255,255,0.45)", fontSize:15, lineHeight:1.75 }}>
-            From AI-powered tools to simple business websites — here's a look at what I do.
+          <p style={{ color:"rgba(255,255,255,0.45)", fontSize:15, lineHeight:1.8 }}>
+            Here's exactly what I build — websites, data dashboards, and AI-powered
+            tools that solve real business problems.
           </p>
         </div>
 
-        {/* ── Featured project ── */}
-        {PROJECTS.filter(p => p.featured).map(p => (
-          <div key={p.id} style={{
-            borderRadius:24, padding:"40px 36px", marginBottom:24,
-            background:`linear-gradient(135deg,${p.gradFrom},${p.gradTo})`,
-            border:`1px solid rgba(167,139,250,0.2)`,
-            position:"relative", overflow:"hidden",
-          }}>
-            {/* Glow */}
-            <div style={{
-              position:"absolute", top:-60, right:-60, width:240, height:240,
-              borderRadius:"50%",
-              background:`radial-gradient(circle, rgba(167,139,250,0.12), transparent 70%)`,
-              pointerEvents:"none",
-            }} />
+        {/* Project cards */}
+        <div style={{ display:"flex", flexDirection:"column", gap:20 }}>
+          {PROJECTS.map((p) => {
+            const Icon = p.icon;
+            return (
+              <div key={p.id} className="card-hover" style={{
+                borderRadius:24, padding:"36px 32px",
+                background:`linear-gradient(135deg,${p.gradFrom},${p.gradTo})`,
+                border:`1px solid ${p.borderColor}`,
+                position:"relative", overflow:"hidden",
+              }}>
+                {/* Corner glow */}
+                <div style={{
+                  position:"absolute", top:-40, right:-40,
+                  width:180, height:180, borderRadius:"50%",
+                  background:`radial-gradient(circle,${p.gradFrom.replace("0.1","0.2").replace("0.12","0.25")},transparent 70%)`,
+                  pointerEvents:"none",
+                }}/>
 
-            <div style={{ display:"flex", flexWrap:"wrap", gap:24, justifyContent:"space-between", alignItems:"flex-start", position:"relative" }}>
-              <div style={{ flex:1, minWidth:280 }}>
-                <div style={{ display:"flex", gap:8, marginBottom:14, flexWrap:"wrap" }}>
-                  <span style={{ fontSize:10, fontFamily:"'Sora',sans-serif", fontWeight:700,
-                    letterSpacing:"0.08em", textTransform:"uppercase",
-                    background:"rgba(255,255,255,0.07)", border:"1px solid rgba(255,255,255,0.12)",
-                    padding:"4px 10px", borderRadius:999, color:"rgba(255,255,255,0.7)" }}>
-                    {p.category}
-                  </span>
-                  <span style={{ fontSize:10, fontFamily:"'Sora',sans-serif", fontWeight:700,
-                    letterSpacing:"0.08em", textTransform:"uppercase",
-                    background:"#F97316", padding:"4px 10px", borderRadius:999, color:"white" }}>
-                    Featured
-                  </span>
-                </div>
-                <h3 style={{ fontFamily:"'Sora',sans-serif", fontWeight:800,
-                  fontSize:"clamp(28px,3.5vw,44px)", color:"#FFFFFF", marginBottom:12 }}>
-                  {p.title}
-                </h3>
-                <p style={{ color:"rgba(255,255,255,0.55)", fontSize:15, lineHeight:1.75, maxWidth:520, marginBottom:20 }}>
-                  {p.summary}
-                </p>
-                <div style={{ display:"flex", flexWrap:"wrap", gap:8 }}>
-                  {p.stack.map(t => (
-                    <span key={t} style={{
-                      fontSize:12, fontFamily:"'Sora',sans-serif",
-                      background:"rgba(255,255,255,0.07)", border:"1px solid rgba(255,255,255,0.1)",
-                      padding:"4px 10px", borderRadius:8, color:"rgba(255,255,255,0.7)",
-                    }}>{t}</span>
-                  ))}
-                </div>
-              </div>
-              <div style={{ display:"flex", flexDirection:"column", gap:10, flexShrink:0 }}>
-                {p.liveUrl && (
-                  <a href={p.liveUrl} target="_blank" rel="noopener noreferrer" className="btn-primary"
-                    style={{ fontSize:14 }}>
-                    View Project <ExternalLink size={14}/>
-                  </a>
-                )}
-              </div>
-            </div>
-          </div>
-        ))}
+                <div style={{
+                  display:"grid", gridTemplateColumns:"1fr",
+                  gap:32, position:"relative",
+                }} className="lg:grid-cols-3">
 
-        {/* ── Other projects grid ── */}
-        <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fill,minmax(280px,1fr))", gap:20 }}>
-          {PROJECTS.filter(p => !p.featured).map(p => (
-            <div key={p.id} className="card-hover" style={{
-              borderRadius:18, overflow:"hidden",
-              background:"rgba(255,255,255,0.02)",
-              border:"1px solid rgba(255,255,255,0.07)",
-            }}>
-              {/* Accent bar */}
-              <div style={{ height:3, background:`linear-gradient(90deg,${p.accentColor},transparent)` }} />
-              <div style={{ padding:"20px 20px 24px" }}>
-                <span style={{ fontSize:10, fontFamily:"'Sora',sans-serif", fontWeight:700,
-                  letterSpacing:"0.08em", textTransform:"uppercase", color:"rgba(255,255,255,0.3)" }}>
-                  {p.category}
-                </span>
-                <h3 style={{ fontFamily:"'Sora',sans-serif", fontWeight:700, fontSize:17,
-                  color:"#FFFFFF", margin:"6px 0 10px" }}>
-                  {p.title}
-                </h3>
-                <p style={{ fontSize:13, color:"rgba(255,255,255,0.42)", lineHeight:1.7, marginBottom:16 }}>
-                  {p.summary}
-                </p>
-                <div style={{ display:"flex", flexWrap:"wrap", gap:6, marginBottom:16 }}>
-                  {p.stack.map(t => (
-                    <span key={t} style={{
-                      fontSize:11, fontFamily:"'Sora',sans-serif",
-                      background:"rgba(255,255,255,0.05)", border:"1px solid rgba(255,255,255,0.08)",
-                      padding:"3px 8px", borderRadius:6, color:"rgba(255,255,255,0.5)",
-                    }}>{t}</span>
-                  ))}
+                  {/* LEFT — Icon + title + summary */}
+                  <div className="lg:col-span-2">
+                    {/* Tag */}
+                    <div style={{ display:"flex", alignItems:"center", gap:10, marginBottom:16 }}>
+                      <div style={{
+                        width:40, height:40, borderRadius:11,
+                        background:`rgba(255,255,255,0.06)`,
+                        border:`1px solid ${p.borderColor}`,
+                        display:"flex", alignItems:"center", justifyContent:"center",
+                        flexShrink:0,
+                      }}>
+                        <Icon size={18} color={p.accentColor}/>
+                      </div>
+                      <span style={{
+                        fontSize:11, fontFamily:"'Sora',sans-serif", fontWeight:700,
+                        letterSpacing:"0.08em", textTransform:"uppercase",
+                        color:p.accentColor, opacity:0.85,
+                      }}>
+                        {p.tag}
+                      </span>
+                    </div>
+
+                    <h3 style={{
+                      fontFamily:"'Sora',sans-serif", fontWeight:800,
+                      fontSize:"clamp(20px,2.5vw,28px)", color:"#FFFFFF",
+                      marginBottom:12, lineHeight:1.2,
+                    }}>
+                      {p.title}
+                    </h3>
+
+                    <p style={{
+                      color:"rgba(255,255,255,0.52)", fontSize:15,
+                      lineHeight:1.8, marginBottom:20,
+                    }}>
+                      {p.summary}
+                    </p>
+
+                    {/* Tech stack */}
+                    <div style={{ display:"flex", flexWrap:"wrap", gap:8 }}>
+                      {p.stack.map(t => (
+                        <span key={t} style={{
+                          fontSize:12, fontFamily:"'Sora',sans-serif",
+                          background:"rgba(255,255,255,0.06)",
+                          border:"1px solid rgba(255,255,255,0.10)",
+                          padding:"4px 10px", borderRadius:8,
+                          color:"rgba(255,255,255,0.65)",
+                        }}>{t}</span>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* RIGHT — Details + CTA */}
+                  <div style={{ display:"flex", flexDirection:"column", justifyContent:"space-between", gap:20 }}>
+                    {/* Details list */}
+                    <ul style={{ listStyle:"none", padding:0, margin:0,
+                      display:"flex", flexDirection:"column", gap:8 }}>
+                      {p.details.map(d => (
+                        <li key={d} style={{ display:"flex", alignItems:"flex-start", gap:8 }}>
+                          <span style={{
+                            width:16, height:16, borderRadius:"50%", flexShrink:0, marginTop:1,
+                            background:`${p.accentColor}18`,
+                            border:`1px solid ${p.accentColor}44`,
+                            display:"flex", alignItems:"center", justifyContent:"center",
+                            fontSize:8, color:p.accentColor, fontWeight:700,
+                          }}>✓</span>
+                          <span style={{ fontSize:13, color:"rgba(255,255,255,0.6)", lineHeight:1.6 }}>
+                            {d}
+                          </span>
+                        </li>
+                      ))}
+                    </ul>
+
+                    {/* CTA */}
+                    {p.cta.external ? (
+                      <a href={p.cta.href} target="_blank" rel="noopener noreferrer"
+                        className="btn-primary" style={{ fontSize:14, justifyContent:"center" }}>
+                        {p.cta.label} <ExternalLink size={14}/>
+                      </a>
+                    ) : (
+                      <a href={p.cta.href} className="btn-primary"
+                        style={{ fontSize:14, justifyContent:"center" }}>
+                        {p.cta.label}
+                      </a>
+                    )}
+                  </div>
                 </div>
-                {p.liveUrl
-                  ? <a href={p.liveUrl} target="_blank" rel="noopener noreferrer"
-                      style={{ fontSize:13, color:"#F97316", fontWeight:600,
-                        fontFamily:"'Sora',sans-serif", textDecoration:"none" }}>
-                      View Project <ExternalLink size={12} style={{display:"inline",verticalAlign:"middle"}}/>
-                    </a>
-                  : <span style={{ fontSize:12, color:"rgba(255,255,255,0.25)",
-                      fontFamily:"'Sora',sans-serif" }}>Work sample — on request</span>
-                }
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
-        {/* Bottom CTA */}
+        {/* Bottom nudge */}
         <div style={{
-          marginTop:48, borderRadius:20, padding:"36px 32px", textAlign:"center",
-          background:"rgba(249,115,22,0.06)", border:"1px solid rgba(249,115,22,0.15)",
+          marginTop:40, borderRadius:18, padding:"28px 32px", textAlign:"center",
+          background:"rgba(249,115,22,0.05)", border:"1px solid rgba(249,115,22,0.12)",
         }}>
-          <h3 style={{ fontFamily:"'Sora',sans-serif", fontWeight:700, fontSize:20,
-            color:"#FFFFFF", marginBottom:8 }}>
-            Want to see more or discuss a project?
-          </h3>
-          <p style={{ color:"rgba(255,255,255,0.4)", marginBottom:20, fontSize:14 }}>
-            I'm happy to share more details or walk you through what I can build for you.
+          <p style={{ fontFamily:"'Sora',sans-serif", fontWeight:700,
+            fontSize:18, color:"#FFFFFF", marginBottom:8 }}>
+            Have a project in mind?
+          </p>
+          <p style={{ color:"rgba(255,255,255,0.4)", fontSize:14, marginBottom:20 }}>
+            Let's talk about what you need — free consultation, no pressure.
           </p>
           <a href="#contact" className="btn-primary">Start a Conversation</a>
         </div>

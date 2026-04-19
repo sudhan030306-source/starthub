@@ -41,17 +41,17 @@ export default function Navbar() {
           <div style={{
             background:"#FFFFFF",
             borderRadius:10,
-            padding:"5px 12px",
+            padding:"6px 14px",
             display:"flex", alignItems:"center", justifyContent:"center",
-            height:42,
+            height:54,
             boxShadow:"0 2px 12px rgba(255,255,255,0.08)",
           }}>
             <Image
               src="/logo.png"
               alt="StartlyHub"
-              width={110}
-              height={32}
-              style={{ objectFit:"contain", height:30, width:"auto" }}
+              width={150}
+              height={44}
+              style={{ objectFit:"contain", height:42, width:"auto" }}
               priority
             />
           </div>

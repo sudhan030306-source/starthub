@@ -7,7 +7,6 @@ import Projects      from "@/components/Projects";
 import WhyChooseMe   from "@/components/WhyChooseMe";
 import Process       from "@/components/Process";
 import Pricing       from "@/components/Pricing";
-import Testimonials  from "@/components/Testimonials";
 import FAQ           from "@/components/FAQ";
 import Contact       from "@/components/Contact";
 import Footer        from "@/components/Footer";
@@ -24,7 +23,6 @@ export default function Home() {
       <WhyChooseMe/>
       <Process/>
       <Pricing/>
-      <Testimonials/>
       <FAQ/>
       <Contact/>
       <Footer/>

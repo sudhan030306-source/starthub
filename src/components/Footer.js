@@ -63,15 +63,15 @@ export default function Footer() {
               textDecoration:"none", marginBottom:16 }}>
               <div style={{
                 background:"#FFFFFF", borderRadius:9,
-                padding:"4px 10px", display:"inline-flex",
-                alignItems:"center", justifyContent:"center", height:38,
+                padding:"5px 12px", display:"inline-flex",
+                alignItems:"center", justifyContent:"center", height:50,
               }}>
                 <Image
                   src="/logo.png"
                   alt="StartlyHub"
-                  width={110}
-                  height={28}
-                  style={{ objectFit:"contain", height:28, width:"auto" }}
+                  width={140}
+                  height={40}
+                  style={{ objectFit:"contain", height:38, width:"auto" }}
                 />
               </div>
             </a>

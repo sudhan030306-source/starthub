@@ -52,17 +52,18 @@ export default function About() {
                 Freelance Web Developer · Commerce Graduate
               </p>
 
-              <div style={{ height:1, background:"rgba(255,255,255,0.07)", marginBottom:24 }} />
+              <div style={{ height:1, background:"rgba(255,255,255,0.07)", marginBottom:20 }} />
 
-              {/* Mini stats */}
-              <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr 1fr", gap:16, textAlign:"center" }}>
-                {[["10+","Projects"],["100%","Satisfaction"],["Fast","Delivery"]].map(([v,l])=>(
-                  <div key={l}>
-                    <div style={{ fontFamily:"'Sora',sans-serif", fontWeight:800,
-                      fontSize:20, color:"#F97316" }}>{v}</div>
-                    <div style={{ fontSize:11, color:"rgba(255,255,255,0.35)", marginTop:2 }}>{l}</div>
-                  </div>
-                ))}
+              {/* AI development note */}
+              <div style={{
+                padding:"10px 14px", borderRadius:10,
+                background:"rgba(249,115,22,0.07)", border:"1px solid rgba(249,115,22,0.18)",
+                display:"flex", alignItems:"center", gap:8, marginBottom:12,
+              }}>
+                <span style={{ fontSize:14 }}>✦</span>
+                <span style={{ fontSize:12, color:"rgba(255,255,255,0.55)" }}>
+                  Websites built with AI-assisted development
+                </span>
               </div>
 
               {/* Currently working */}
