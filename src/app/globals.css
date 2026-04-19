@@ -1,0 +1,182 @@
+/* Fonts loaded via <link> in layout.js */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── BASE ───────────────────────────────────────────────── */
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background-color: #0C0C10;
+  color: #FFFFFF;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── SCROLLBAR ──────────────────────────────────────────── */
+::-webkit-scrollbar       { width: 5px; }
+::-webkit-scrollbar-track { background: #0C0C10; }
+::-webkit-scrollbar-thumb { background: #F59E0B; border-radius: 10px; }
+
+/* ── NOISE TEXTURE ──────────────────────────────────────── */
+.noise::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── LAYOUT ─────────────────────────────────────────────── */
+.section-pad  { @apply py-24 px-6 md:px-10 lg:px-16; }
+.container-c  { @apply max-w-6xl mx-auto; }
+
+/* ── GOLD GRADIENT TEXT ─────────────────────────────────── */
+.text-gold-gradient {
+  background: linear-gradient(100deg, #FCD34D 0%, #F59E0B 50%, #D97706 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── SHIMMER TEXT ───────────────────────────────────────── */
+.shimmer-text {
+  background: linear-gradient(90deg, #F59E0B 20%, #FDE68A 40%, #F59E0B 60%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 2.5s linear infinite;
+}
+
+/* ── GLASS CARD ─────────────────────────────────────────── */
+.glass {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  backdrop-filter: blur(12px);
+}
+
+/* ── GOLD GLOW BORDER ON HOVER ──────────────────────────── */
+.glow-hover {
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+}
+.glow-hover:hover {
+  border-color: rgba(245,158,11,0.4);
+  box-shadow: 0 0 24px rgba(245,158,11,0.08), 0 8px 32px rgba(0,0,0,0.4);
+  transform: translateY(-3px);
+}
+
+/* ── BUTTONS ─────────────────────────────────────────────── */
+.btn-gold {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #F59E0B;
+  color: #07070A;
+  font-family: 'Sora', sans-serif;
+  font-weight: 700;
+  font-size: 0.875rem;
+  padding: 14px 28px;
+  border-radius: 10px;
+  transition: all 0.2s ease;
+  letter-spacing: -0.01em;
+}
+.btn-gold:hover {
+  background: #FBBF24;
+  transform: scale(1.04);
+  box-shadow: 0 8px 30px rgba(245,158,11,0.35);
+}
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  color: rgba(255,255,255,0.75);
+  font-family: 'Sora', sans-serif;
+  font-weight: 600;
+  font-size: 0.875rem;
+  padding: 14px 28px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.15);
+  transition: all 0.2s ease;
+}
+.btn-ghost:hover {
+  border-color: rgba(255,255,255,0.35);
+  color: #FFF;
+  background: rgba(255,255,255,0.06);
+}
+
+/* ── SECTION LABEL ──────────────────────────────────────── */
+.label-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'Sora', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #F59E0B;
+  background: rgba(245,158,11,0.1);
+  border: 1px solid rgba(245,158,11,0.2);
+  padding: 5px 12px;
+  border-radius: 100px;
+  margin-bottom: 18px;
+}
+
+/* ── ANIMATION DELAYS ───────────────────────────────────── */
+.d1 { animation-delay: 0.1s; opacity: 0; }
+.d2 { animation-delay: 0.2s; opacity: 0; }
+.d3 { animation-delay: 0.3s; opacity: 0; }
+.d4 { animation-delay: 0.4s; opacity: 0; }
+.d5 { animation-delay: 0.5s; opacity: 0; }
+.d6 { animation-delay: 0.6s; opacity: 0; }
+
+/* ── GEOMETRIC LINE GRID (hero bg) ──────────────────────── */
+.geo-grid {
+  background-image:
+    linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+/* ── CURSOR GLOW (follows mouse in hero) ────────────────── */
+.cursor-glow {
+  pointer-events: none;
+  position: fixed;
+  width: 400px;
+  height: 400px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(245,158,11,0.06) 0%, transparent 70%);
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  transition: opacity 0.3s ease;
+}
+
+/* ── NAV LINK ───────────────────────────────────────────── */
+.nav-l {
+  font-family: 'Sora', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.55);
+  transition: color 0.2s ease;
+  position: relative;
+}
+.nav-l::after {
+  content: '';
+  position: absolute;
+  bottom: -3px; left: 0;
+  width: 0; height: 1.5px;
+  background: #F59E0B;
+  transition: width 0.2s ease;
+}
+.nav-l:hover { color: #fff; }
+.nav-l:hover::after { width: 100%; }
+
+/* ── 3D CUBE SVG GLOW ───────────────────────────────────── */
+.geo-glow {
+  filter: drop-shadow(0 0 40px rgba(245,158,11,0.12))
+          drop-shadow(0 0 80px rgba(100,120,180,0.08));
+}
