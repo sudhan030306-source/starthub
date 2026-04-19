@@ -37,20 +37,24 @@ export default function Navbar() {
       }}>
         {/* Logo — StartlyHub */}
         <a href="#home" style={{ display:"flex", alignItems:"center", textDecoration:"none" }}>
-          <Image
-            src="/logo.png"
-            alt="StartlyHub"
-            width={120}
-            height={48}
-            style={{
-              objectFit:"contain",
-              /* Invert the dark logo to white so it reads on the dark navbar */
-              filter: "invert(1) brightness(2)",
-              height: 40,
-              width: "auto",
-            }}
-            priority
-          />
+          {/* White pill background keeps the original dark logo perfectly visible on dark navbar */}
+          <div style={{
+            background:"#FFFFFF",
+            borderRadius:10,
+            padding:"5px 12px",
+            display:"flex", alignItems:"center", justifyContent:"center",
+            height:42,
+            boxShadow:"0 2px 12px rgba(255,255,255,0.08)",
+          }}>
+            <Image
+              src="/logo.png"
+              alt="StartlyHub"
+              width={110}
+              height={32}
+              style={{ objectFit:"contain", height:30, width:"auto" }}
+              priority
+            />
+          </div>
         </a>
 
         {/* Desktop nav */}

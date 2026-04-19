@@ -61,17 +61,19 @@ export default function Footer() {
           <div style={{ gridColumn:"span 2" }}>
             <a href="#home" style={{ display:"inline-flex", alignItems:"center",
               textDecoration:"none", marginBottom:16 }}>
-              <Image
-                src="/logo.png"
-                alt="StartlyHub"
-                width={130}
-                height={52}
-                style={{
-                  objectFit:"contain",
-                  filter:"invert(1) brightness(2)",
-                  height:38, width:"auto",
-                }}
-              />
+              <div style={{
+                background:"#FFFFFF", borderRadius:9,
+                padding:"4px 10px", display:"inline-flex",
+                alignItems:"center", justifyContent:"center", height:38,
+              }}>
+                <Image
+                  src="/logo.png"
+                  alt="StartlyHub"
+                  width={110}
+                  height={28}
+                  style={{ objectFit:"contain", height:28, width:"auto" }}
+                />
+              </div>
             </a>
             <p style={{ color:"rgba(255,255,255,0.35)",fontSize:13,lineHeight:1.8,maxWidth:220,marginBottom:20 }}>
               Affordable, clean websites for businesses, freelancers, and personal brands across India.
