@@ -1,253 +1,348 @@
 "use client";
-import { useEffect, useRef } from "react";
+
+import { useEffect, useRef, useState } from "react";
 import { ArrowRight, ChevronDown } from "lucide-react";
-import Image from "next/image";
+
+// ── EDIT HERO COPY HERE ──────────────────────────────────────────────────────
+const HERO = {
+  badge:    "Available for freelance projects",
+  line1:    "Affordable Websites",
+  line2:    "That Actually Work",
+  line3:    "For Your Business.",
+  sub:      "I build clean, modern, and mobile-ready websites for small businesses, local shops, startups, and personal brands — at a price that makes real sense.",
+  cta1:     { label: "Get Your Website Built", href: "#contact"  },
+  cta2:     { label: "View My Work",            href: "#projects" },
+  stats: [
+    { value: "10+",   label: "Projects"         },
+    { value: "100%",  label: "Satisfaction"      },
+    { value: "48hr",  label: "First Draft"       },
+  ],
+};
+
+// ── 3D Rotating Cube (CSS only) ──────────────────────────────────────────────
+function Cube3D({ size = 160, speed = 16, opacity = 0.9 }) {
+  const half = size / 2;
+  const faces = [
+    { cls: "front",  tx: `translateZ(${half}px)` },
+    { cls: "back",   tx: `rotateY(180deg) translateZ(${half}px)` },
+    { cls: "right",  tx: `rotateY(90deg)  translateZ(${half}px)` },
+    { cls: "left",   tx: `rotateY(-90deg) translateZ(${half}px)` },
+    { cls: "top",    tx: `rotateX(90deg)  translateZ(${half}px)` },
+    { cls: "bottom", tx: `rotateX(-90deg) translateZ(${half}px)` },
+  ];
+  return (
+    <div
+      style={{
+        width: size, height: size,
+        transformStyle: "preserve-3d",
+        animation: `rotateCube ${speed}s linear infinite`,
+        opacity,
+        position: "relative",
+      }}
+    >
+      {faces.map((f) => (
+        <div
+          key={f.cls}
+          style={{
+            position: "absolute",
+            width: size, height: size,
+            border: "1px solid rgba(255,255,255,0.1)",
+            background:
+              f.cls === "front"
+                ? "linear-gradient(135deg,rgba(249,115,22,0.09),rgba(255,255,255,0.02))"
+                : "linear-gradient(135deg,rgba(255,255,255,0.06),rgba(255,255,255,0.01))",
+            transform: f.tx,
+            backdropFilter: "blur(2px)",
+          }}
+        />
+      ))}
+      <style>{`
+        @keyframes rotateCube {
+          0%   { transform: rotateX(20deg) rotateY(0deg); }
+          100% { transform: rotateX(20deg) rotateY(360deg); }
+        }
+      `}</style>
+    </div>
+  );
+}
+
+// ── Coin / Disc shape ────────────────────────────────────────────────────────
+function CoinDisc({ size = 130 }) {
+  return (
+    <div
+      style={{
+        width: size, height: size,
+        borderRadius: "50%",
+        border: "10px solid rgba(255,255,255,0.12)",
+        background: "linear-gradient(135deg,rgba(255,255,255,0.05),rgba(249,115,22,0.06))",
+        boxShadow: "inset 0 0 40px rgba(249,115,22,0.08), 0 0 60px rgba(249,115,22,0.12)",
+        animation: "floatCoin 4s ease-in-out infinite",
+        display: "flex", alignItems: "center", justifyContent: "center",
+      }}
+    >
+      {/* Inner ring */}
+      <div style={{
+        width: size * 0.55, height: size * 0.55,
+        borderRadius: "50%",
+        border: "6px solid rgba(249,115,22,0.25)",
+        background: "rgba(249,115,22,0.06)",
+      }} />
+      <style>{`
+        @keyframes floatCoin {
+          0%,100% { transform: translateY(0) rotate(0deg); }
+          50%      { transform: translateY(-16px) rotate(8deg); }
+        }
+      `}</style>
+    </div>
+  );
+}
+
+// ── Floating particle dots ────────────────────────────────────────────────────
+const PARTICLES = [
+  { x: "10%",  y: "20%", d: 3, delay: "0s",   dur: "4s"  },
+  { x: "80%",  y: "15%", d: 2, delay: "0.5s", dur: "5s"  },
+  { x: "60%",  y: "75%", d: 4, delay: "1s",   dur: "3.5s"},
+  { x: "25%",  y: "65%", d: 2, delay: "1.5s", dur: "6s"  },
+  { x: "90%",  y: "50%", d: 3, delay: "0.8s", dur: "4.5s"},
+  { x: "45%",  y: "35%", d: 2, delay: "2s",   dur: "5.5s"},
+];
 
 export default function Hero() {
-  const glowRef = useRef(null);
-
-  useEffect(() => {
-    const move = (e) => {
-      if (glowRef.current) {
-        glowRef.current.style.left = e.clientX + "px";
-        glowRef.current.style.top  = e.clientY + "px";
-      }
-    };
-    window.addEventListener("mousemove", move);
-    return () => window.removeEventListener("mousemove", move);
-  }, []);
+  const [visible, setVisible] = useState(false);
+  useEffect(() => { const t = setTimeout(() => setVisible(true), 80); return () => clearTimeout(t); }, []);
 
   return (
-    <section id="home" className="relative min-h-screen flex items-center overflow-hidden geo-grid"
-      style={{ background: "#07070A" }}>
+    <section
+      id="home"
+      className="relative min-h-screen flex flex-col justify-center hero-grid overflow-hidden"
+      style={{ background: "#08080F" }}
+    >
+      {/* ── Radial orange glow centre-left ── */}
+      <div style={{
+        position:"absolute", top:"50%", left:"30%",
+        transform:"translate(-50%,-50%)",
+        width:600, height:600,
+        borderRadius:"50%",
+        background:"radial-gradient(circle, rgba(249,115,22,0.1) 0%, transparent 70%)",
+        pointerEvents:"none",
+      }} />
 
-      {/* Cursor glow */}
-      <div ref={glowRef} className="cursor-glow hidden lg:block"/>
+      {/* ── Floating particles ── */}
+      {PARTICLES.map((p, i) => (
+        <div key={i} style={{
+          position:"absolute", left:p.x, top:p.y,
+          width:p.d, height:p.d, borderRadius:"50%",
+          background:"rgba(249,115,22,0.5)",
+          animation:`particleFloat ${p.dur} ease-in-out infinite ${p.delay}`,
+          pointerEvents:"none",
+        }} />
+      ))}
+      <style>{`
+        @keyframes particleFloat {
+          0%,100% { transform:translateY(0); opacity:0.5; }
+          50%      { transform:translateY(-20px); opacity:1; }
+        }
+      `}</style>
 
-      {/* Ambient blobs */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/2 left-1/4 w-[600px] h-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full"
-          style={{ background:"radial-gradient(circle,rgba(245,158,11,0.055) 0%,transparent 65%)" }}/>
-        <div className="absolute top-1/3 right-0 w-[500px] h-[500px] rounded-full"
-          style={{ background:"radial-gradient(circle,rgba(80,100,200,0.055) 0%,transparent 70%)" }}/>
-      </div>
+      {/* ── Main content grid ── */}
+      <div className="container-max section-padding w-full">
+        <div style={{ display:"grid", gridTemplateColumns:"1fr", gap:48, alignItems:"center" }}
+          className="lg:grid-cols-2">
 
-      <div className="max-w-6xl mx-auto px-6 md:px-10 lg:px-16 pt-24 pb-16 w-full relative z-10">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+          {/* LEFT — Text ── */}
+          <div style={{ opacity: visible ? 1 : 0, transition: "opacity 0.1s" }}>
 
-          {/* ── LEFT: copy ── */}
-          <div>
-            {/* Available badge */}
-            <div className="label-tag animate-fade-up d1">
-              <span className="w-1.5 h-1.5 rounded-full bg-green-400 inline-block"
-                style={{ boxShadow:"0 0 6px #4ade80" }}/>
-              Available for projects
+            {/* Badge */}
+            <div style={{
+              display:"inline-flex", alignItems:"center", gap:8,
+              background:"rgba(249,115,22,0.1)", border:"1px solid rgba(249,115,22,0.25)",
+              borderRadius:999, padding:"6px 14px", marginBottom:24,
+              animation: visible ? "fade-up 0.6s cubic-bezier(0.16,1,0.3,1) forwards" : "none",
+              opacity:0,
+            }}>
+              <span style={{ width:7, height:7, background:"#4ADE80", borderRadius:"50%",
+                animation:"pulse 2s ease-in-out infinite" }} />
+              <span style={{ fontSize:11, fontWeight:700, fontFamily:"'Sora',sans-serif",
+                letterSpacing:"0.08em", color:"#F97316", textTransform:"uppercase" }}>
+                {HERO.badge}
+              </span>
+              <style>{`
+                @keyframes fade-up {
+                  from { opacity:0; transform:translateY(28px); }
+                  to   { opacity:1; transform:translateY(0); }
+                }
+                @keyframes pulse {
+                  0%,100% { box-shadow:0 0 0 0 rgba(74,222,128,0.4); }
+                  50%     { box-shadow:0 0 0 5px rgba(74,222,128,0); }
+                }
+              `}</style>
             </div>
 
             {/* Headline */}
-            <h1 className="font-display font-extrabold text-5xl md:text-6xl lg:text-[66px]
-                           leading-[1.05] tracking-tight mb-6 animate-fade-up d2">
-              Affordable<br/>
-              Websites that<br/>
-              <span className="text-gold-gradient">Help You Grow</span>
-            </h1>
-
-            <p className="text-white/50 text-lg leading-relaxed max-w-lg mb-10 animate-fade-up d3">
-              I build clean, fast, mobile-first websites for small businesses, local shops,
-              startups, and personal brands — at a price that actually makes sense.
-            </p>
-
-            {/* CTAs */}
-            <div className="flex flex-wrap gap-3 mb-12 animate-fade-up d4">
-              <a href="#contact" className="btn-gold">
-                Get Your Website Built <ArrowRight size={16}/>
-              </a>
-              <a href="#projects" className="btn-ghost">
-                View My Work
-              </a>
-            </div>
-
-            {/* Stats */}
-            <div className="flex gap-10 animate-fade-up d5">
-              {[
-                { v:"10+",  l:"Projects"      },
-                { v:"100%", l:"Satisfaction"  },
-                { v:"48hr", l:"First Draft"   },
-              ].map(s => (
-                <div key={s.l}>
-                  <div className="font-display font-extrabold text-2xl text-gold">{s.v}</div>
-                  <div className="text-xs text-white/35 mt-0.5 font-display">{s.l}</div>
+            <div style={{ marginBottom:24 }}>
+              {[HERO.line1, HERO.line2, HERO.line3].map((line, i) => (
+                <div key={i} style={{
+                  overflow:"hidden",
+                  animation: `fade-up 0.7s cubic-bezier(0.16,1,0.3,1) ${0.1 + i*0.1}s forwards`,
+                  opacity: 0,
+                }}>
+                  <h1 style={{
+                    fontFamily:"'Sora',sans-serif",
+                    fontWeight: 800,
+                    fontSize: "clamp(36px, 5vw, 58px)",
+                    lineHeight: 1.08,
+                    marginBottom: 4,
+                    color: i === 0 ? undefined : "#FFFFFF",
+                    ...(i === 0 ? {
+                      background:"linear-gradient(135deg,#F97316 0%,#FBBF24 55%,#F97316 100%)",
+                      backgroundSize:"200% auto",
+                      WebkitBackgroundClip:"text",
+                      WebkitTextFillColor:"transparent",
+                      backgroundClip:"text",
+                      animation:"shimmer 3s linear infinite",
+                    } : {}),
+                  }}>
+                    {line}
+                  </h1>
                 </div>
               ))}
             </div>
+
+            {/* Subtext */}
+            <p style={{
+              color:"rgba(255,255,255,0.55)", fontSize:17, lineHeight:1.75,
+              maxWidth:500, marginBottom:36,
+              animation:"fade-up 0.7s cubic-bezier(0.16,1,0.3,1) 0.4s forwards", opacity:0,
+            }}>
+              {HERO.sub}
+            </p>
+
+            {/* CTAs */}
+            <div style={{
+              display:"flex", flexWrap:"wrap", gap:12, marginBottom:48,
+              animation:"fade-up 0.7s cubic-bezier(0.16,1,0.3,1) 0.5s forwards", opacity:0,
+            }}>
+              <a href={HERO.cta1.href} className="btn-primary" style={{ fontSize:15 }}>
+                {HERO.cta1.label} <ArrowRight size={16} />
+              </a>
+              <a href={HERO.cta2.href} className="btn-ghost" style={{ fontSize:15 }}>
+                {HERO.cta2.label}
+              </a>
+            </div>
+
+            {/* Stats row */}
+            <div style={{
+              display:"flex", gap:32, flexWrap:"wrap",
+              animation:"fade-up 0.7s cubic-bezier(0.16,1,0.3,1) 0.6s forwards", opacity:0,
+            }}>
+              {HERO.stats.map((s, i) => (
+                <div key={i}>
+                  <div style={{ fontFamily:"'Sora',sans-serif", fontWeight:800,
+                    fontSize:26, color:"#F97316" }}>{s.value}</div>
+                  <div style={{ fontSize:12, color:"rgba(255,255,255,0.4)",
+                    fontWeight:500, marginTop:2 }}>{s.label}</div>
+                </div>
+              ))}
+              <div style={{ width:1, background:"rgba(255,255,255,0.08)", alignSelf:"stretch" }} />
+              <div style={{ display:"flex", alignItems:"center", gap:8 }}>
+                <span style={{ width:8, height:8, background:"#4ADE80",
+                  borderRadius:"50%", display:"inline-block" }} />
+                <span style={{ fontSize:12, color:"rgba(255,255,255,0.4)" }}>
+                  Open for projects
+                </span>
+              </div>
+            </div>
           </div>
 
-          {/* ── RIGHT: 3D geometric scene + logo card ── */}
-          <div className="hidden lg:flex items-center justify-center relative h-[520px]">
+          {/* RIGHT — 3D Scene ── */}
+          <div className="hidden lg:flex" style={{
+            alignItems:"center", justifyContent:"center",
+            position:"relative", height:480,
+            animation:"fade-up 0.8s cubic-bezier(0.16,1,0.3,1) 0.3s forwards", opacity:0,
+          }}>
+            {/* Perspective wrapper */}
+            <div style={{ perspective: 900, position:"relative", width:400, height:400 }}>
 
-            {/* Floating brand card */}
-            <div className="absolute top-[6%] left-[5%] z-10 glass rounded-2xl px-5 py-4 flex items-center gap-3 animate-float"
-              style={{ border:"1px solid rgba(255,255,255,0.1)", animationDelay:"0.3s" }}>
-              <div className="relative w-8 h-8">
-                <Image src="/logo.png" alt="StartlyHub" fill className="object-contain"
-                  style={{ filter:"brightness(0) invert(1)" }}/>
+              {/* Grid floor lines */}
+              <div style={{
+                position:"absolute", inset:0,
+                backgroundImage:"linear-gradient(rgba(255,255,255,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.04) 1px,transparent 1px)",
+                backgroundSize:"40px 40px",
+                transform:"rotateX(50deg) translateY(60px)",
+                opacity:0.6,
+                borderRadius:8,
+              }} />
+
+              {/* Large cube — back/right */}
+              <div style={{
+                position:"absolute", top:"5%", right:"5%",
+                animation:"rotateBigCube 18s linear infinite",
+              }}>
+                <Cube3D size={180} />
               </div>
-              <div>
-                <p className="font-display font-bold text-sm text-white tracking-wider uppercase">
-                  Startly<span className="text-gold">Hub</span>
-                </p>
-                <p className="text-[10px] text-white/30 font-display">by Sudhan M</p>
+              <style>{`
+                @keyframes rotateBigCube {
+                  0%   { transform: rotateX(18deg) rotateY(0deg); }
+                  100% { transform: rotateX(18deg) rotateY(360deg); }
+                }
+              `}</style>
+
+              {/* Coin — front/centre */}
+              <div style={{ position:"absolute", bottom:"15%", left:"15%" }}>
+                <CoinDisc size={130} />
               </div>
+
+              {/* Small cube — top left */}
+              <div style={{
+                position:"absolute", top:"10%", left:"10%",
+                animation:"rotateSmallCube 10s linear infinite reverse",
+              }}>
+                <Cube3D size={70} speed={10} opacity={0.5} />
+              </div>
+              <style>{`
+                @keyframes rotateSmallCube {
+                  0%   { transform: rotateX(25deg) rotateY(0deg); }
+                  100% { transform: rotateX(25deg) rotateY(360deg); }
+                }
+              `}</style>
+
+              {/* Orange glow blob */}
+              <div style={{
+                position:"absolute", bottom:"20%", right:"20%",
+                width:120, height:120, borderRadius:"50%",
+                background:"radial-gradient(circle, rgba(249,115,22,0.25) 0%, transparent 70%)",
+                filter:"blur(20px)",
+                animation:"glowPulse 3s ease-in-out infinite",
+                pointerEvents:"none",
+              }} />
+              <style>{`
+                @keyframes glowPulse {
+                  0%,100% { opacity:0.6; transform:scale(1); }
+                  50%     { opacity:1;   transform:scale(1.2); }
+                }
+              `}</style>
             </div>
-
-            {/* Status pill */}
-            <div className="absolute top-[22%] right-[4%] glass rounded-xl px-3 py-2 animate-float"
-              style={{ border:"1px solid rgba(74,222,128,0.2)", animationDelay:"1s" }}>
-              <div className="flex items-center gap-1.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-green-400"
-                  style={{ boxShadow:"0 0 5px #4ade80" }}/>
-                <span className="text-[11px] font-display text-green-400 font-semibold">Open for work</span>
-              </div>
-            </div>
-
-            {/* Main 3D geometry */}
-            <GeometryScene/>
           </div>
         </div>
       </div>
 
       {/* Scroll hint */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 text-white/20">
-        <span className="text-[10px] font-display tracking-widest uppercase">scroll</span>
-        <ChevronDown size={15} className="animate-bounce"/>
+      <div style={{
+        position:"absolute", bottom:32, left:"50%", transform:"translateX(-50%)",
+        display:"flex", flexDirection:"column", alignItems:"center", gap:4,
+        color:"rgba(255,255,255,0.3)",
+      }}>
+        <span style={{ fontSize:11, fontFamily:"'Sora',sans-serif", letterSpacing:"0.1em" }}>
+          SCROLL
+        </span>
+        <ChevronDown size={16} style={{ animation:"bounceDown 1.5s ease-in-out infinite" }} />
+        <style>{`
+          @keyframes bounceDown {
+            0%,100% { transform:translateY(0); }
+            50%      { transform:translateY(5px); }
+          }
+        `}</style>
       </div>
     </section>
-  );
-}
-
-/* ── 3D Geometric SVG Scene ─────────────────────────────────────────────── */
-function GeometryScene() {
-  return (
-    <div className="relative w-full h-full geo-glow">
-
-      {/* ── Large dark metallic cube ── */}
-      <div className="absolute top-[10%] right-[2%] animate-float" style={{ animationDelay:"0s" }}>
-        <svg width="230" height="230" viewBox="0 0 230 230" fill="none">
-          {/* Top face */}
-          <path d="M115 18 L210 64 L115 110 L20 64 Z" fill="url(#cubeTop)"
-            stroke="rgba(255,255,255,0.13)" strokeWidth="0.8"/>
-          {/* Right face */}
-          <path d="M210 64 L210 156 L115 202 L115 110 Z" fill="url(#cubeRight)"
-            stroke="rgba(255,255,255,0.05)" strokeWidth="0.8"/>
-          {/* Left face */}
-          <path d="M20 64 L115 110 L115 202 L20 156 Z" fill="url(#cubeLeft)"
-            stroke="rgba(255,255,255,0.03)" strokeWidth="0.8"/>
-          <defs>
-            <linearGradient id="cubeTop" x1="20" y1="18" x2="210" y2="110" gradientUnits="userSpaceOnUse">
-              <stop offset="0%" stopColor="#3A3A52"/>
-              <stop offset="100%" stopColor="#1E1E2E"/>
-            </linearGradient>
-            <linearGradient id="cubeRight" x1="115" y1="64" x2="210" y2="202" gradientUnits="userSpaceOnUse">
-              <stop offset="0%" stopColor="#252538"/>
-              <stop offset="100%" stopColor="#0F0F1A"/>
-            </linearGradient>
-            <linearGradient id="cubeLeft" x1="20" y1="64" x2="115" y2="202" gradientUnits="userSpaceOnUse">
-              <stop offset="0%" stopColor="#1A1A28"/>
-              <stop offset="100%" stopColor="#0A0A12"/>
-            </linearGradient>
-          </defs>
-          {/* Edge highlights */}
-          <line x1="115" y1="18" x2="210" y2="64" stroke="rgba(255,255,255,0.22)" strokeWidth="1"/>
-          <line x1="20"  y1="64" x2="115" y2="18" stroke="rgba(255,255,255,0.14)" strokeWidth="1"/>
-          <line x1="115" y1="110" x2="115" y2="202" stroke="rgba(255,255,255,0.06)" strokeWidth="0.8"/>
-        </svg>
-      </div>
-
-      {/* ── Smaller gold-tinted cube ── */}
-      <div className="absolute top-[42%] right-[55%] animate-float" style={{ animationDelay:"1.6s" }}>
-        <svg width="100" height="100" viewBox="0 0 100 100" fill="none">
-          <path d="M50 10 L90 30 L50 50 L10 30 Z" fill="url(#smCubeTop)"
-            stroke="rgba(245,158,11,0.25)" strokeWidth="0.8"/>
-          <path d="M90 30 L90 70 L50 90 L50 50 Z" fill="url(#smCubeRight)"
-            stroke="rgba(245,158,11,0.12)" strokeWidth="0.8"/>
-          <path d="M10 30 L50 50 L50 90 L10 70 Z" fill="url(#smCubeLeft)"
-            stroke="rgba(255,255,255,0.04)" strokeWidth="0.8"/>
-          <defs>
-            <linearGradient id="smCubeTop" x1="10" y1="10" x2="90" y2="50" gradientUnits="userSpaceOnUse">
-              <stop offset="0%" stopColor="#4A3C1A"/>
-              <stop offset="100%" stopColor="#2A2210"/>
-            </linearGradient>
-            <linearGradient id="smCubeRight" x1="50" y1="30" x2="90" y2="90" gradientUnits="userSpaceOnUse">
-              <stop offset="0%" stopColor="#2E2412"/>
-              <stop offset="100%" stopColor="#14100A"/>
-            </linearGradient>
-            <linearGradient id="smCubeLeft" x1="10" y1="30" x2="50" y2="90" gradientUnits="userSpaceOnUse">
-              <stop offset="0%" stopColor="#1E1A0C"/>
-              <stop offset="100%" stopColor="#0C0A06"/>
-            </linearGradient>
-          </defs>
-          <line x1="50" y1="10" x2="90" y2="30" stroke="rgba(245,158,11,0.55)" strokeWidth="1"/>
-          <line x1="10" y1="30" x2="50" y2="10" stroke="rgba(245,158,11,0.38)" strokeWidth="1"/>
-        </svg>
-      </div>
-
-      {/* ── Metallic coin / disc ── */}
-      <div className="absolute bottom-[10%] right-[10%] animate-float" style={{ animationDelay:"0.9s" }}>
-        <svg width="170" height="84" viewBox="0 0 170 84" fill="none">
-          <ellipse cx="85" cy="60" rx="76" ry="22" fill="url(#coinBody)" stroke="rgba(255,255,255,0.08)" strokeWidth="0.8"/>
-          <ellipse cx="85" cy="36" rx="76" ry="22" fill="url(#coinTop)"  stroke="rgba(255,255,255,0.14)" strokeWidth="0.8"/>
-          <ellipse cx="85" cy="36" rx="52" ry="15" fill="none" stroke="rgba(255,255,255,0.07)" strokeWidth="1.2"/>
-          <ellipse cx="85" cy="36" rx="30" ry="8.5" fill="none" stroke="rgba(255,255,255,0.05)" strokeWidth="1"/>
-          <ellipse cx="85" cy="36" rx="14" ry="4" fill="url(#coinCenter)"/>
-          <path d="M9 36 Q9 60 85 82 Q161 60 161 36" fill="url(#coinSide)"/>
-          <defs>
-            <linearGradient id="coinTop" x1="9" y1="14" x2="161" y2="58" gradientUnits="userSpaceOnUse">
-              <stop offset="0%"  stopColor="#3E3E54"/>
-              <stop offset="40%" stopColor="#5C5C78"/>
-              <stop offset="100%" stopColor="#2A2A3C"/>
-            </linearGradient>
-            <linearGradient id="coinBody" x1="9" y1="36" x2="161" y2="82" gradientUnits="userSpaceOnUse">
-              <stop offset="0%"  stopColor="#1E1E2C"/>
-              <stop offset="100%" stopColor="#0C0C14"/>
-            </linearGradient>
-            <linearGradient id="coinSide" x1="9" y1="36" x2="161" y2="82" gradientUnits="userSpaceOnUse">
-              <stop offset="0%" stopColor="#28283A"/>
-              <stop offset="100%" stopColor="#10101A"/>
-            </linearGradient>
-            <radialGradient id="coinCenter" cx="50%" cy="50%" r="50%">
-              <stop offset="0%"  stopColor="rgba(255,255,255,0.35)"/>
-              <stop offset="100%" stopColor="rgba(255,255,255,0.05)"/>
-            </radialGradient>
-          </defs>
-          <path d="M28 29 Q85 16 142 29" stroke="rgba(255,255,255,0.22)" strokeWidth="1" fill="none"/>
-        </svg>
-      </div>
-
-      {/* ── Gold glow orb ── */}
-      <div className="absolute top-[35%] right-[22%] w-3 h-3 rounded-full animate-float"
-        style={{
-          animationDelay:"2.2s",
-          background:"#F59E0B",
-          boxShadow:"0 0 18px rgba(245,158,11,0.9), 0 0 50px rgba(245,158,11,0.3)",
-        }}/>
-
-      {/* ── Dot particles ── */}
-      {[
-        {t:"18%", r:"68%", d:"0.4s", s:"6px"},
-        {t:"78%", r:"25%", d:"1.3s", s:"5px"},
-        {t:"88%", r:"75%", d:"0.6s", s:"4px"},
-      ].map((p,i) => (
-        <div key={i} className="absolute rounded-full bg-white/15 animate-float"
-          style={{ top:p.t, right:p.r, animationDelay:p.d, width:p.s, height:p.s }}/>
-      ))}
-
-      {/* ── Horizontal glowing line ── */}
-      <div className="absolute bottom-[28%] left-[5%] right-[5%] h-px"
-        style={{ background:"linear-gradient(90deg,transparent,rgba(245,158,11,0.15),transparent)" }}/>
-
-      {/* ── Floor reflection glow ── */}
-      <div className="absolute bottom-0 left-0 right-0 h-20 pointer-events-none"
-        style={{ background:"linear-gradient(to top,rgba(245,158,11,0.025) 0%,transparent 100%)" }}/>
-    </div>
   );
 }

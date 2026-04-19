@@ -1,119 +1,153 @@
 "use client";
-import Image from "next/image";
-import { Code2, BarChart2, BookOpen, Lightbulb } from "lucide-react";
+import { Code2, BarChart2, BookOpen, Lightbulb, ArrowRight } from "lucide-react";
 
 const SKILLS = [
-  { icon: Code2,      label: "Web Development",   desc: "Next.js, React, Tailwind CSS, HTML/CSS" },
-  { icon: BarChart2,  label: "Data & Dashboards", desc: "Power BI, Python, SQL, Excel"           },
-  { icon: BookOpen,   label: "Business Tools",    desc: "Tally, accounting workflows"            },
-  { icon: Lightbulb,  label: "Business Thinking", desc: "Commerce background, practical mindset" },
+  { icon: Code2,      label: "Web Development",      desc: "Next.js, React, Tailwind, HTML/CSS" },
+  { icon: BarChart2,  label: "Data & Dashboards",     desc: "Power BI, Python, SQL, Excel"       },
+  { icon: BookOpen,   label: "Business Tools",        desc: "Tally, ERP basics, Finance workflows"},
+  { icon: Lightbulb,  label: "Business Thinking",     desc: "Commerce background, practical mindset"},
 ];
 
 export default function About() {
   return (
-    <section id="about" className="section-pad bg-ink">
-      <div className="container-c mx-auto">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
+    <section id="about" className="section-padding" style={{ background:"#0D0D1A" }}>
+      <div className="container-max">
 
-          {/* ── LEFT: visual card ── */}
-          <div className="relative">
-            <div className="relative rounded-3xl overflow-hidden max-w-sm"
-              style={{
-                background: "linear-gradient(135deg,#141420 0%,#1C1C2E 100%)",
-                border: "1px solid rgba(255,255,255,0.07)",
-                aspectRatio: "4/5",
+        <div style={{ display:"grid", gridTemplateColumns:"1fr", gap:64, alignItems:"center" }}
+          className="lg:grid-cols-2">
+
+          {/* LEFT — Visual panel */}
+          <div style={{ position:"relative" }}>
+
+            {/* Main card */}
+            <div style={{
+              background:"rgba(255,255,255,0.03)",
+              border:"1px solid rgba(255,255,255,0.08)",
+              borderRadius:24, padding:"40px 36px", position:"relative", overflow:"hidden",
+            }}>
+              {/* Orange corner accent */}
+              <div style={{
+                position:"absolute", top:0, right:0,
+                width:120, height:120,
+                background:"radial-gradient(circle at top right, rgba(249,115,22,0.15), transparent 70%)",
+                pointerEvents:"none",
+              }} />
+
+              {/* Initials avatar */}
+              <div style={{
+                width:72, height:72, borderRadius:18, marginBottom:20,
+                background:"linear-gradient(135deg,#F97316,#EA580C)",
+                display:"flex", alignItems:"center", justifyContent:"center",
+                fontFamily:"'Sora',sans-serif", fontWeight:800, fontSize:26, color:"white",
+                boxShadow:"0 8px 28px rgba(249,115,22,0.4)",
               }}>
-
-              {/* Background grid */}
-              <div className="absolute inset-0 geo-grid opacity-40"/>
-
-              {/* Logo + info centered */}
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="text-center px-8">
-
-                  {/* Logo mark */}
-                  <div className="relative w-24 h-24 mx-auto mb-5 flex items-center justify-center rounded-2xl"
-                    style={{
-                      background: "rgba(245,158,11,0.06)",
-                      border: "1px solid rgba(245,158,11,0.18)",
-                      boxShadow: "0 0 40px rgba(245,158,11,0.06)",
-                    }}>
-                    <div className="relative w-14 h-14">
-                      <Image
-                        src="/logo.png"
-                        alt="StartlyHub"
-                        fill
-                        className="object-contain"
-                        style={{ filter: "brightness(0) invert(1)" }}
-                      />
-                    </div>
-                  </div>
-
-                  <p className="font-display font-extrabold text-xl text-white tracking-widest uppercase mb-1">
-                    Startly<span className="text-gold">Hub</span>
-                  </p>
-                  <p className="text-white/40 text-sm mb-1">by Sudhan M</p>
-                  <p className="text-white/25 text-xs">
-                    Commerce · Tech · Strategy
-                  </p>
-                </div>
+                SM
               </div>
 
-              {/* Bottom glass tag */}
-              <div className="absolute bottom-5 left-5 right-5 glass rounded-xl px-4 py-3"
-                style={{ border:"1px solid rgba(255,255,255,0.08)" }}>
-                <div className="flex items-center gap-2">
-                  <span className="w-2 h-2 rounded-full bg-green-400"
-                    style={{ boxShadow:"0 0 6px #4ade80" }}/>
-                  <span className="text-xs font-display text-white/60">
-                    Open for new projects
-                  </span>
-                </div>
+              <h3 style={{ fontFamily:"'Sora',sans-serif", fontWeight:700, fontSize:20,
+                color:"#FFFFFF", marginBottom:6 }}>
+                Sudhan M
+              </h3>
+              <p style={{ color:"rgba(255,255,255,0.45)", fontSize:13, marginBottom:24 }}>
+                Freelance Web Developer · Commerce Graduate
+              </p>
+
+              <div style={{ height:1, background:"rgba(255,255,255,0.07)", marginBottom:24 }} />
+
+              {/* Mini stats */}
+              <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr 1fr", gap:16, textAlign:"center" }}>
+                {[["10+","Projects"],["100%","Satisfaction"],["Fast","Delivery"]].map(([v,l])=>(
+                  <div key={l}>
+                    <div style={{ fontFamily:"'Sora',sans-serif", fontWeight:800,
+                      fontSize:20, color:"#F97316" }}>{v}</div>
+                    <div style={{ fontSize:11, color:"rgba(255,255,255,0.35)", marginTop:2 }}>{l}</div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Currently working */}
+              <div style={{
+                marginTop:24, padding:"10px 14px", borderRadius:10,
+                background:"rgba(74,222,128,0.07)", border:"1px solid rgba(74,222,128,0.15)",
+                display:"flex", alignItems:"center", gap:8,
+              }}>
+                <span style={{ width:7, height:7, background:"#4ADE80",
+                  borderRadius:"50%", flexShrink:0,
+                  boxShadow:"0 0 8px rgba(74,222,128,0.6)" }} />
+                <span style={{ fontSize:12, color:"rgba(255,255,255,0.55)" }}>
+                  Currently open for new projects
+                </span>
               </div>
             </div>
 
-            {/* Decorative accent */}
-            <div className="absolute -bottom-4 -right-4 w-20 h-20 rounded-2xl hidden lg:block"
-              style={{
-                background: "rgba(245,158,11,0.08)",
-                border: "1px solid rgba(245,158,11,0.2)",
-              }}/>
+            {/* Decorative floating squares */}
+            <div style={{
+              position:"absolute", top:-16, right:-16, width:48, height:48,
+              border:"1px solid rgba(249,115,22,0.25)", borderRadius:8,
+              animation:"floatSquare 4s ease-in-out infinite",
+            }} />
+            <div style={{
+              position:"absolute", bottom:-12, left:-12, width:32, height:32,
+              background:"rgba(249,115,22,0.12)", borderRadius:6,
+              animation:"floatSquare 5s ease-in-out infinite reverse",
+            }} />
+            <style>{`
+              @keyframes floatSquare {
+                0%,100% { transform:translateY(0) rotate(0deg); }
+                50%      { transform:translateY(-10px) rotate(5deg); }
+              }
+            `}</style>
           </div>
 
-          {/* ── RIGHT: text ── */}
+          {/* RIGHT — Text */}
           <div>
-            <div className="label-tag">About Me</div>
-            <h2 className="font-display font-extrabold text-3xl md:text-4xl text-white mb-5 leading-tight">
+            <span className="section-label">About Me</span>
+            <h2 style={{
+              fontFamily:"'Sora',sans-serif", fontWeight:800,
+              fontSize:"clamp(28px,3.5vw,42px)", lineHeight:1.15,
+              color:"#FFFFFF", marginBottom:20,
+            }}>
               Commerce Brain.<br/>
-              <span className="text-gold-gradient">Tech Skills.</span> Real Results.
+              <span style={{
+                background:"linear-gradient(135deg,#F97316,#FBBF24)",
+                WebkitBackgroundClip:"text", WebkitTextFillColor:"transparent",
+              }}>Tech Skills.</span> Real Results.
             </h2>
-            <p className="text-white/50 leading-relaxed mb-4">
-              Hi! I'm Sudhan M — founder of <span className="text-gold font-semibold">StartlyHub</span>,
-              a freelance web development studio built for small businesses. I come from a commerce
-              background, which means I understand how real businesses work — not just how websites look.
-              That makes all the difference.
+
+            <p style={{ color:"rgba(255,255,255,0.55)", lineHeight:1.8, marginBottom:16, fontSize:15 }}>
+              Hi, I'm Sudhan M — a freelance web developer and business tech specialist based in India.
+              I come from a commerce background, which means I understand how real businesses work,
+              not just how websites look.
             </p>
-            <p className="text-white/50 leading-relaxed mb-8">
-              Whether you're a local shop needing your first website, a startup wanting a sharp landing
-              page, or a freelancer wanting to showcase your work — I help you get online without
-              breaking the bank. Simple, useful, and built for real business goals.
+            <p style={{ color:"rgba(255,255,255,0.55)", lineHeight:1.8, marginBottom:32, fontSize:15 }}>
+              Whether you're a local shop needing your first website, a startup wanting a clean landing page,
+              or a freelancer looking to showcase your work — I can help you get online without breaking the bank.
             </p>
 
             {/* Skills grid */}
-            <div className="grid grid-cols-2 gap-3">
+            <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:12, marginBottom:32 }}>
               {SKILLS.map(({ icon: Icon, label, desc }) => (
-                <div key={label}
-                  className="glass glow-hover rounded-xl p-4"
-                  style={{ border:"1px solid rgba(255,255,255,0.07)" }}>
-                  <div className="w-9 h-9 rounded-lg flex items-center justify-center mb-2"
-                    style={{ background:"rgba(245,158,11,0.1)" }}>
-                    <Icon size={17} style={{ color:"#F59E0B" }}/>
+                <div key={label} className="card-hover" style={{
+                  background:"rgba(255,255,255,0.03)", border:"1px solid rgba(255,255,255,0.08)",
+                  borderRadius:14, padding:"16px",
+                }}>
+                  <div style={{
+                    width:36, height:36, background:"rgba(249,115,22,0.1)",
+                    borderRadius:10, display:"flex", alignItems:"center", justifyContent:"center",
+                    marginBottom:10,
+                  }}>
+                    <Icon size={17} color="#F97316" />
                   </div>
-                  <p className="font-display font-semibold text-sm text-white">{label}</p>
-                  <p className="text-xs text-white/35 mt-0.5">{desc}</p>
+                  <p style={{ fontFamily:"'Sora',sans-serif", fontWeight:600,
+                    fontSize:13, color:"#FFFFFF", marginBottom:3 }}>{label}</p>
+                  <p style={{ fontSize:11, color:"rgba(255,255,255,0.35)" }}>{desc}</p>
                 </div>
               ))}
             </div>
+
+            <a href="#contact" className="btn-primary" style={{ fontSize:14 }}>
+              Let's Build Something <ArrowRight size={15}/>
+            </a>
           </div>
         </div>
       </div>

@@ -2,156 +2,212 @@
 import { useState } from "react";
 import { Mail, MessageCircle, MapPin, Send, CheckCircle } from "lucide-react";
 
-const WHATSAPP_NUM = "918807071383";
-const EMAIL        = "stratlyhub@gmail.com";
+// ── CONTACT DETAILS ────────────────────────────────────────────────────────
+const CONTACT = {
+  email:    "stratlyhub@gmail.com",
+  whatsapp: "918807071383",
+  location: "India (Remote & Local)",
+};
 
-const SERVICES = [
+const SERVICE_OPTIONS = [
   "Business Website","Portfolio Website","Landing Page",
   "E-commerce Website","Website Redesign","Data Dashboard",
   "Not sure yet — let's talk",
 ];
 
 export default function Contact() {
-  const [form, setForm]           = useState({ name:"", email:"", service:"", message:"" });
+  const [form, setForm] = useState({ name:"", email:"", service:"", message:"" });
   const [submitted, setSubmitted] = useState(false);
-  const [loading, setLoading]     = useState(false);
+  const [loading,   setLoading]   = useState(false);
 
-  const onChange = e => setForm({...form, [e.target.name]: e.target.value});
+  const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
-  const onSubmit = async e => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    // TODO: replace with Formspree / EmailJS / API route
+    // ── Replace this with Formspree / EmailJS / API route ──────────
     await new Promise(r => setTimeout(r, 1200));
     setLoading(false);
     setSubmitted(true);
   };
 
   return (
-    <section id="contact" className="section-pad bg-ink">
-      <div className="container-c mx-auto">
-        <div className="text-center max-w-2xl mx-auto mb-14">
-          <div className="label-tag mx-auto" style={{width:"fit-content"}}>Get In Touch</div>
-          <h2 className="font-display font-extrabold text-3xl md:text-4xl text-white mb-4">
-            Need a Website at a Minimal Cost?<br/>
-            <span className="text-gold-gradient">Let's Talk.</span>
+    <section id="contact" className="section-padding" style={{ background:"#0D0D1A" }}>
+      <div className="container-max">
+        <div style={{ textAlign:"center", maxWidth:600, margin:"0 auto 56px" }}>
+          <span className="section-label">Get In Touch</span>
+          <h2 style={{ fontFamily:"'Sora',sans-serif", fontWeight:800,
+            fontSize:"clamp(28px,3.5vw,42px)", color:"#FFFFFF", marginBottom:14, lineHeight:1.2 }}>
+            Let's Build Something Together
           </h2>
-          <p className="text-white/45 text-lg">
-            Fill in the form or reach out directly — I'll get back within 24 hours. No pressure.
+          <p style={{ color:"rgba(255,255,255,0.45)", fontSize:15, lineHeight:1.8 }}>
+            Fill in the form or reach out directly — I'll get back to you within 24 hours.
+            First consultation is always free, no pressure.
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-5 gap-8">
+        <div style={{ display:"grid", gridTemplateColumns:"1fr", gap:24, maxWidth:900, margin:"0 auto" }}
+          className="lg:grid-cols-5">
 
-          {/* Info column */}
-          <div className="lg:col-span-2 flex flex-col gap-4">
-            <a href={`mailto:${EMAIL}`} className="glass glow-hover rounded-2xl p-5 flex items-center gap-4" style={{border:"1px solid rgba(255,255,255,0.07)"}}>
-              <div className="w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0" style={{background:"rgba(245,158,11,0.1)"}}>
-                <Mail size={19} className="text-gold"/>
+          {/* Info cards */}
+          <div className="lg:col-span-2" style={{ display:"flex", flexDirection:"column", gap:14 }}>
+            {/* Email */}
+            <a href={`mailto:${CONTACT.email}`} className="card-hover" style={{
+              display:"flex", alignItems:"center", gap:14, padding:"18px 18px",
+              background:"rgba(255,255,255,0.03)", border:"1px solid rgba(255,255,255,0.08)",
+              borderRadius:16, textDecoration:"none",
+            }}>
+              <div style={{ width:42,height:42,borderRadius:12,background:"rgba(249,115,22,0.1)",
+                display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0 }}>
+                <Mail size={18} color="#F97316"/>
               </div>
               <div>
-                <p className="font-display font-semibold text-sm text-white">Email</p>
-                <p className="text-xs text-white/40 mt-0.5">{EMAIL}</p>
+                <p style={{ fontFamily:"'Sora',sans-serif",fontWeight:600,fontSize:13,color:"#FFFFFF" }}>Email</p>
+                <p style={{ fontSize:12,color:"rgba(255,255,255,0.4)",marginTop:2 }}>{CONTACT.email}</p>
               </div>
             </a>
 
-            <a href={`https://wa.me/${WHATSAPP_NUM}?text=${encodeURIComponent("Hi! I saw your website and I'm interested in getting a website built.")}`}
-              target="_blank" rel="noopener noreferrer"
-              className="glass glow-hover rounded-2xl p-5 flex items-center gap-4" style={{border:"1px solid rgba(255,255,255,0.07)"}}>
-              <div className="w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0" style={{background:"rgba(37,211,102,0.1)"}}>
-                <MessageCircle size={19} style={{color:"#25D366"}}/>
+            {/* WhatsApp */}
+            <a href={`https://wa.me/${CONTACT.whatsapp}`} target="_blank" rel="noopener noreferrer"
+              className="card-hover" style={{
+                display:"flex",alignItems:"center",gap:14,padding:"18px 18px",
+                background:"rgba(37,211,102,0.06)",border:"1px solid rgba(37,211,102,0.18)",
+                borderRadius:16,textDecoration:"none",
+              }}>
+              <div style={{ width:42,height:42,borderRadius:12,background:"rgba(37,211,102,0.12)",
+                display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0 }}>
+                <MessageCircle size={18} color="#25D366"/>
               </div>
               <div>
-                <p className="font-display font-semibold text-sm text-white">WhatsApp</p>
-                <p className="text-xs text-white/40 mt-0.5">Chat with me directly</p>
+                <p style={{ fontFamily:"'Sora',sans-serif",fontWeight:600,fontSize:13,color:"#FFFFFF" }}>WhatsApp</p>
+                <p style={{ fontSize:12,color:"rgba(255,255,255,0.4)",marginTop:2 }}>Chat with me directly</p>
               </div>
             </a>
 
-            <div className="glass rounded-2xl p-5 flex items-center gap-4" style={{border:"1px solid rgba(255,255,255,0.07)"}}>
-              <div className="w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0" style={{background:"rgba(99,102,241,0.1)"}}>
-                <MapPin size={19} style={{color:"#818CF8"}}/>
+            {/* Location */}
+            <div style={{
+              display:"flex",alignItems:"center",gap:14,padding:"18px 18px",
+              background:"rgba(255,255,255,0.02)",border:"1px solid rgba(255,255,255,0.07)",
+              borderRadius:16,
+            }}>
+              <div style={{ width:42,height:42,borderRadius:12,background:"rgba(96,165,250,0.1)",
+                display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0 }}>
+                <MapPin size={18} color="#60A5FA"/>
               </div>
               <div>
-                <p className="font-display font-semibold text-sm text-white">Location</p>
-                <p className="text-xs text-white/40 mt-0.5">India (Remote & Local)</p>
+                <p style={{ fontFamily:"'Sora',sans-serif",fontWeight:600,fontSize:13,color:"#FFFFFF" }}>Location</p>
+                <p style={{ fontSize:12,color:"rgba(255,255,255,0.4)",marginTop:2 }}>{CONTACT.location}</p>
               </div>
             </div>
 
-            <div className="rounded-2xl p-5" style={{background:"#F59E0B"}}>
-              <p className="font-display font-bold text-ink text-sm mb-1">⚡ Quick Response</p>
-              <p className="text-ink/60 text-xs leading-relaxed">
-                Usually within 24 hours. I work with clients across India and internationally.
-                All conversations are free with no obligation.
+            {/* Response time */}
+            <div style={{
+              padding:"18px 18px",borderRadius:16,
+              background:"rgba(249,115,22,0.08)",border:"1px solid rgba(249,115,22,0.2)",
+            }}>
+              <p style={{ fontFamily:"'Sora',sans-serif",fontWeight:600,fontSize:13,
+                color:"#F97316",marginBottom:4 }}>⚡ Quick Response</p>
+              <p style={{ fontSize:12,color:"rgba(255,255,255,0.4)",lineHeight:1.7 }}>
+                Usually within 24 hours. All conversations are free with no obligation.
               </p>
             </div>
           </div>
 
-          {/* Form column */}
-          <div className="lg:col-span-3 glass rounded-3xl p-8" style={{border:"1px solid rgba(255,255,255,0.07)"}}>
+          {/* Form */}
+          <div className="lg:col-span-3" style={{
+            background:"rgba(255,255,255,0.02)", border:"1px solid rgba(255,255,255,0.08)",
+            borderRadius:24, padding:32,
+          }}>
             {submitted ? (
-              <div className="h-full flex flex-col items-center justify-center text-center py-10">
-                <div className="w-16 h-16 rounded-full flex items-center justify-center mb-4" style={{background:"rgba(74,222,128,0.1)"}}>
-                  <CheckCircle size={32} style={{color:"#4ade80"}}/>
+              <div style={{ display:"flex",flexDirection:"column",alignItems:"center",
+                justifyContent:"center",textAlign:"center",padding:"48px 0" }}>
+                <div style={{ width:64,height:64,borderRadius:"50%",
+                  background:"rgba(74,222,128,0.1)",display:"flex",alignItems:"center",
+                  justifyContent:"center",marginBottom:16 }}>
+                  <CheckCircle size={30} color="#4ADE80"/>
                 </div>
-                <h3 className="font-display font-bold text-xl text-white mb-2">Message Sent!</h3>
-                <p className="text-white/45 text-sm max-w-xs">Thanks for reaching out! I'll get back within 24 hours.</p>
-                <button onClick={() => { setSubmitted(false); setForm({name:"",email:"",service:"",message:""}); }}
-                  className="mt-6 text-sm text-gold font-semibold hover:text-amber-300 transition">
+                <h3 style={{ fontFamily:"'Sora',sans-serif",fontWeight:700,
+                  fontSize:20,color:"#FFFFFF",marginBottom:8 }}>Message Sent!</h3>
+                <p style={{ color:"rgba(255,255,255,0.45)",fontSize:14,maxWidth:280 }}>
+                  Thanks for reaching out, Sudhan will reply within 24 hours.
+                </p>
+                <button onClick={()=>{setSubmitted(false);setForm({name:"",email:"",service:"",message:""});}}
+                  style={{ marginTop:20,fontSize:13,color:"#F97316",fontWeight:600,
+                    background:"none",border:"none",cursor:"pointer" }}>
                   Send another message
                 </button>
               </div>
             ) : (
-              <form onSubmit={onSubmit} className="flex flex-col gap-5">
-                <h3 className="font-display font-bold text-xl text-white">Tell me about your project</h3>
+              <form onSubmit={handleSubmit} style={{ display:"flex",flexDirection:"column",gap:16 }}>
+                <h3 style={{ fontFamily:"'Sora',sans-serif",fontWeight:700,
+                  fontSize:18,color:"#FFFFFF",marginBottom:4 }}>
+                  Tell me about your project
+                </h3>
 
-                <div className="grid sm:grid-cols-2 gap-4">
-                  {[
-                    {name:"name",  label:"Your Name *",     type:"text",  ph:"Rajan Kumar"},
-                    {name:"email", label:"Email Address *", type:"email", ph:"you@email.com"},
-                  ].map(f => (
-                    <div key={f.name}>
-                      <label className="block text-xs font-semibold font-display text-white/50 mb-1.5">{f.label}</label>
-                      <input type={f.type} name={f.name} required value={form[f.name]} onChange={onChange}
-                        placeholder={f.ph}
-                        className="w-full rounded-xl px-4 py-2.5 text-sm text-white outline-none transition"
-                        style={{background:"rgba(255,255,255,0.05)", border:"1px solid rgba(255,255,255,0.1)", caretColor:"#F59E0B"}}
-                        onFocus={e => e.target.style.borderColor="rgba(245,158,11,0.5)"}
-                        onBlur={e  => e.target.style.borderColor="rgba(255,255,255,0.1)"}
-                      />
-                    </div>
-                  ))}
+                <div style={{ display:"grid",gridTemplateColumns:"1fr 1fr",gap:14 }}
+                  className="sm:grid-cols-2 grid-cols-1">
+                  <div>
+                    <label style={{ display:"block",fontSize:11,fontFamily:"'Sora',sans-serif",
+                      fontWeight:600,color:"rgba(255,255,255,0.5)",marginBottom:6,letterSpacing:"0.05em" }}>
+                      YOUR NAME *
+                    </label>
+                    <input type="text" name="name" required value={form.name}
+                      onChange={handleChange} placeholder="Rahul Gupta"
+                      className="input-dark" />
+                  </div>
+                  <div>
+                    <label style={{ display:"block",fontSize:11,fontFamily:"'Sora',sans-serif",
+                      fontWeight:600,color:"rgba(255,255,255,0.5)",marginBottom:6,letterSpacing:"0.05em" }}>
+                      EMAIL *
+                    </label>
+                    <input type="email" name="email" required value={form.email}
+                      onChange={handleChange} placeholder="you@email.com"
+                      className="input-dark" />
+                  </div>
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold font-display text-white/50 mb-1.5">What do you need?</label>
-                  <select name="service" value={form.service} onChange={onChange}
-                    className="w-full rounded-xl px-4 py-2.5 text-sm text-white outline-none transition"
-                    style={{background:"rgba(255,255,255,0.05)", border:"1px solid rgba(255,255,255,0.1)"}}>
-                    <option value="" style={{background:"#141418"}}>Select a service...</option>
-                    {SERVICES.map(s => <option key={s} value={s} style={{background:"#141418"}}>{s}</option>)}
+                  <label style={{ display:"block",fontSize:11,fontFamily:"'Sora',sans-serif",
+                    fontWeight:600,color:"rgba(255,255,255,0.5)",marginBottom:6,letterSpacing:"0.05em" }}>
+                    WHAT DO YOU NEED?
+                  </label>
+                  <select name="service" value={form.service} onChange={handleChange}
+                    className="input-dark" style={{ appearance:"none" }}>
+                    <option value="" style={{ background:"#111120" }}>Select a service...</option>
+                    {SERVICE_OPTIONS.map(s=>(
+                      <option key={s} value={s} style={{ background:"#111120" }}>{s}</option>
+                    ))}
                   </select>
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold font-display text-white/50 mb-1.5">Tell me more *</label>
-                  <textarea name="message" required rows={4} value={form.message} onChange={onChange}
-                    placeholder="Briefly describe your business, what kind of website you need, and any specific requirements..."
-                    className="w-full rounded-xl px-4 py-2.5 text-sm text-white outline-none transition resize-none"
-                    style={{background:"rgba(255,255,255,0.05)", border:"1px solid rgba(255,255,255,0.1)", caretColor:"#F59E0B"}}
-                    onFocus={e => e.target.style.borderColor="rgba(245,158,11,0.5)"}
-                    onBlur={e  => e.target.style.borderColor="rgba(255,255,255,0.1)"}
-                  />
+                  <label style={{ display:"block",fontSize:11,fontFamily:"'Sora',sans-serif",
+                    fontWeight:600,color:"rgba(255,255,255,0.5)",marginBottom:6,letterSpacing:"0.05em" }}>
+                    TELL ME MORE *
+                  </label>
+                  <textarea name="message" required rows={4} value={form.message}
+                    onChange={handleChange}
+                    placeholder="Briefly describe your business, what kind of website you need, and any specific requirements or questions..."
+                    className="input-dark" style={{ resize:"none" }} />
                 </div>
 
-                <button type="submit" disabled={loading} className="btn-gold justify-center py-3.5 disabled:opacity-50">
+                <button type="submit" disabled={loading} className="btn-primary"
+                  style={{ justifyContent:"center",padding:"14px",marginTop:4,
+                    opacity:loading?0.7:1,cursor:loading?"not-allowed":"pointer" }}>
                   {loading ? (
-                    <>
-                      <span className="w-4 h-4 border-2 border-ink/30 border-t-ink rounded-full animate-spin"/>
-                      Sending...
-                    </>
-                  ) : (<>Send Message <Send size={15}/></>)}
+                    <><span style={{ width:16,height:16,border:"2px solid rgba(255,255,255,0.3)",
+                      borderTopColor:"white",borderRadius:"50%",
+                      animation:"spin 0.7s linear infinite",display:"inline-block" }}/>
+                    Sending...</>
+                  ) : (
+                    <>Send Message <Send size={15}/></>
+                  )}
                 </button>
-                <p className="text-xs text-white/25 text-center">No spam. Your details are only used to respond to your inquiry.</p>
+                <style>{`@keyframes spin{to{transform:rotate(360deg);}}`}</style>
+
+                <p style={{ fontSize:11,color:"rgba(255,255,255,0.25)",textAlign:"center" }}>
+                  No spam. Your details are only used to respond to your inquiry.
+                </p>
               </form>
             )}
           </div>

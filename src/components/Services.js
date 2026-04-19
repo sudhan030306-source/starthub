@@ -2,61 +2,90 @@
 import { Globe, UserSquare, Megaphone, ShoppingCart, RefreshCcw, BarChart2 } from "lucide-react";
 
 const SERVICES = [
-  { icon: Globe,       title: "Business Websites",   desc: "A professional online presence for your shop, company, or service. Clean, modern, and fully mobile-friendly — built to win trust from the first visit.", hot: true  },
-  { icon: UserSquare,  title: "Portfolio Websites",  desc: "Showcase your work, skills, and services with a personal portfolio that stands out for freelancers and creative professionals.",                         hot: false },
-  { icon: Megaphone,   title: "Landing Pages",       desc: "A focused, conversion-driven page to promote a product, campaign, or offer. Built to turn visitors into leads fast.",                                   hot: false },
-  { icon: ShoppingCart,title: "Basic E-commerce",    desc: "Start selling online with a simple, easy-to-manage store. Product listings, cart, and payment integration — without the complexity.",                  hot: false },
-  { icon: RefreshCcw,  title: "Website Redesign",    desc: "Got an outdated website? I'll give it a fresh modern look that loads faster, looks great on all devices, and represents you better.",                   hot: false },
-  { icon: BarChart2,   title: "Data Dashboards",     desc: "Power BI dashboards, Python scripts, and custom reporting tools to help track your numbers and make smarter business decisions.",                       hot: false },
+  { icon: Globe,        title: "Business Websites",        desc: "A professional online presence for your shop, company, or service. Built to win customer trust from the very first visit.",           featured: true  },
+  { icon: UserSquare,   title: "Portfolio Websites",       desc: "Showcase your work and skills with a personal site that stands out. Perfect for freelancers and creative professionals.",          featured: false },
+  { icon: Megaphone,    title: "Landing Pages",            desc: "A focused, conversion-driven page to promote a product or campaign. Turns visitors into leads or customers fast.",                featured: false },
+  { icon: ShoppingCart, title: "Basic E-commerce Sites",   desc: "Start selling online with a simple, easy-to-manage store — product listings, cart, and payment integration without complexity.", featured: false },
+  { icon: RefreshCcw,   title: "Website Redesign",         desc: "Got an outdated website? I'll give it a fresh, modern look that loads faster and represents your business better.",             featured: false },
+  { icon: BarChart2,    title: "Data Dashboards & Tools",  desc: "Power BI dashboards, Python scripts, and custom reporting tools to help you track numbers and make smarter decisions.",          featured: false },
 ];
 
 export default function Services() {
   return (
-    <section id="services" className="section-pad" style={{background:"#090910"}}>
-      <div className="container-c mx-auto">
-        <div className="text-center max-w-2xl mx-auto mb-14">
-          <div className="label-tag mx-auto" style={{width:"fit-content"}}>What I Do</div>
-          <h2 className="font-display font-extrabold text-3xl md:text-4xl text-white mb-4">
+    <section id="services" className="section-padding" style={{ background:"#08080F" }}>
+      <div className="container-max">
+        <div style={{ textAlign:"center", maxWidth:600, margin:"0 auto 56px" }}>
+          <span className="section-label">What I Do</span>
+          <h2 style={{ fontFamily:"'Sora',sans-serif", fontWeight:800,
+            fontSize:"clamp(28px,3.5vw,42px)", color:"#FFFFFF", marginBottom:14, lineHeight:1.2 }}>
             Services Built for Real Business Needs
           </h2>
-          <p className="text-white/45 text-lg">
-            No bloated packages. No unnecessary fluff. Just practical, results-focused work at a price
-            that makes sense for small businesses.
+          <p style={{ color:"rgba(255,255,255,0.45)", fontSize:15, lineHeight:1.75 }}>
+            No bloated packages, no unnecessary fluff. Just practical, results-focused
+            work at a price that makes sense for small businesses.
           </p>
         </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {SERVICES.map(({ icon: Icon, title, desc, hot }) => (
-            <div key={title} className={`relative rounded-2xl p-6 glow-hover ${
-              hot
-                ? "bg-gold text-ink"
-                : "glass"
-            }`}
-            style={hot ? {} : {border:"1px solid rgba(255,255,255,0.07)"}}>
-              {hot && (
-                <span className="absolute top-4 right-4 text-[10px] font-bold font-display uppercase tracking-wider bg-ink/15 px-2.5 py-1 rounded-full">
-                  Most Popular
-                </span>
+        <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fill,minmax(300px,1fr))", gap:20 }}>
+          {SERVICES.map(({ icon: Icon, title, desc, featured }) => (
+            <div key={title} className="card-hover" style={{
+              position:"relative", borderRadius:20, padding:"28px 24px",
+              background: featured
+                ? "linear-gradient(135deg,rgba(249,115,22,0.15),rgba(249,115,22,0.05))"
+                : "rgba(255,255,255,0.03)",
+              border: featured
+                ? "1px solid rgba(249,115,22,0.35)"
+                : "1px solid rgba(255,255,255,0.07)",
+              overflow:"hidden",
+            }}>
+              {featured && (
+                <span style={{
+                  position:"absolute", top:16, right:16,
+                  background:"#F97316", color:"white",
+                  fontSize:10, fontFamily:"'Sora',sans-serif", fontWeight:700,
+                  letterSpacing:"0.08em", textTransform:"uppercase",
+                  padding:"4px 10px", borderRadius:999,
+                }}>Popular</span>
               )}
-              <div className={`w-11 h-11 rounded-xl flex items-center justify-center mb-4 ${
-                hot ? "bg-ink/10" : "bg-white/5"
-              }`}>
-                <Icon size={20} className={hot ? "text-ink" : "text-gold"} />
+
+              {/* Corner glow for featured */}
+              {featured && (
+                <div style={{
+                  position:"absolute", top:0, right:0,
+                  width:100, height:100,
+                  background:"radial-gradient(circle at top right, rgba(249,115,22,0.2), transparent 70%)",
+                  pointerEvents:"none",
+                }} />
+              )}
+
+              <div style={{
+                width:44, height:44, borderRadius:12, marginBottom:16,
+                background: featured ? "rgba(249,115,22,0.2)" : "rgba(249,115,22,0.09)",
+                display:"flex", alignItems:"center", justifyContent:"center",
+              }}>
+                <Icon size={20} color="#F97316" />
               </div>
-              <h3 className={`font-display font-bold text-base mb-2 ${hot ? "text-ink" : "text-white"}`}>{title}</h3>
-              <p className={`text-sm leading-relaxed ${hot ? "text-ink/65" : "text-white/45"}`}>{desc}</p>
-              <a href="#contact" className={`inline-block mt-4 text-sm font-semibold font-display ${
-                hot ? "text-ink/70 hover:text-ink" : "text-gold hover:text-amber-300"
-              } transition`}>
+
+              <h3 style={{ fontFamily:"'Sora',sans-serif", fontWeight:700,
+                fontSize:16, color:"#FFFFFF", marginBottom:8 }}>{title}</h3>
+              <p style={{ fontSize:13, color:"rgba(255,255,255,0.45)", lineHeight:1.7, marginBottom:16 }}>
+                {desc}
+              </p>
+              <a href="#contact" style={{
+                fontSize:13, fontFamily:"'Sora',sans-serif", fontWeight:600,
+                color:"#F97316", textDecoration:"none",
+              }}>
                 Get a quote →
               </a>
             </div>
           ))}
         </div>
 
-        <div className="text-center mt-10">
-          <p className="text-white/35 text-sm mb-4">Not sure what you need?</p>
-          <a href="#contact" className="btn-gold">Tell me about your project</a>
+        <div style={{ textAlign:"center", marginTop:48 }}>
+          <p style={{ color:"rgba(255,255,255,0.4)", marginBottom:16, fontSize:14 }}>
+            Not sure which service fits your needs?
+          </p>
+          <a href="#contact" className="btn-primary">Tell Me About Your Project</a>
         </div>
       </div>
     </section>

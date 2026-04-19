@@ -2,49 +2,76 @@
 import { BadgeDollarSign, Paintbrush2, Smartphone, MessageSquare, HandHeart, Wrench } from "lucide-react";
 
 const REASONS = [
-  { icon: BadgeDollarSign, title: "Genuinely Affordable",     desc: "Every business deserves a good website regardless of budget. My pricing is built for real people, not corporations." },
-  { icon: Paintbrush2,     title: "Clean, Modern Design",     desc: "No outdated templates. Every site I build looks contemporary and professional."                                       },
-  { icon: Smartphone,      title: "Mobile-First Always",      desc: "Most visitors come from phones. Every site is optimised for mobile from day one — not as an afterthought."           },
-  { icon: MessageSquare,   title: "Fast Communication",       desc: "No ghosting, no long waits. You'll always know the status of your project and I respond quickly."                    },
-  { icon: HandHeart,       title: "Beginner-Friendly Process",desc: "You don't need to know anything about websites. I explain everything in plain language."                            },
-  { icon: Wrench,          title: "Business-First Thinking",  desc: "With a commerce background, I build websites that serve real business goals — not just pretty designs."             },
+  { icon: BadgeDollarSign, title: "Genuinely Affordable",      desc: "Fair pricing designed for small businesses and individuals — not corporates." },
+  { icon: Paintbrush2,     title: "Clean, Modern Design",      desc: "No outdated templates. Every site looks contemporary and represents your brand properly." },
+  { icon: Smartphone,      title: "100% Mobile Responsive",    desc: "Optimized for phones from day one — because that's where most of your visitors come from." },
+  { icon: MessageSquare,   title: "Fast Communication",        desc: "No ghosting, no long waits. You'll always know the status and I reply quickly." },
+  { icon: HandHeart,       title: "Beginner-Friendly Process", desc: "You don't need to know anything about websites. I explain everything in plain language." },
+  { icon: Wrench,          title: "Business-First Thinking",   desc: "Commerce background means I build for real goals — not just pretty designs with no purpose." },
 ];
 
 export default function WhyChooseMe() {
   return (
-    <section className="section-pad" style={{background:"#090910"}}>
-      <div className="container-c mx-auto">
-        <div className="text-center max-w-2xl mx-auto mb-14">
-          <div className="label-tag mx-auto" style={{width:"fit-content"}}>Why Work With Me</div>
-          <h2 className="font-display font-extrabold text-3xl md:text-4xl text-white mb-4">
-            The Kind of Partner You Actually Want
+    <section className="section-padding" style={{ background:"#08080F", position:"relative", overflow:"hidden" }}>
+      {/* Background glow */}
+      <div style={{
+        position:"absolute", top:"50%", left:"50%", transform:"translate(-50%,-50%)",
+        width:600, height:300,
+        background:"radial-gradient(ellipse, rgba(249,115,22,0.06), transparent 70%)",
+        pointerEvents:"none",
+      }} />
+
+      <div className="container-max" style={{ position:"relative" }}>
+        <div style={{ textAlign:"center", maxWidth:600, margin:"0 auto 56px" }}>
+          <span className="section-label">Why Work With Me</span>
+          <h2 style={{ fontFamily:"'Sora',sans-serif", fontWeight:800,
+            fontSize:"clamp(28px,3.5vw,42px)", color:"#FFFFFF", marginBottom:14, lineHeight:1.2 }}>
+            The Partner Small Businesses Actually Need
           </h2>
-          <p className="text-white/45 text-lg">
-            Here's what makes working with me different — and better for small businesses.
+          <p style={{ color:"rgba(255,255,255,0.45)", fontSize:15, lineHeight:1.75 }}>
+            There are thousands of web developers out there. Here's what makes working with me different.
           </p>
         </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fill,minmax(280px,1fr))", gap:16 }}>
           {REASONS.map(({ icon: Icon, title, desc }) => (
-            <div key={title} className="glass glow-hover rounded-2xl p-6" style={{border:"1px solid rgba(255,255,255,0.07)"}}>
-              <div className="w-11 h-11 rounded-xl flex items-center justify-center mb-4" style={{background:"rgba(245,158,11,0.08)"}}>
-                <Icon size={20} className="text-gold" />
+            <div key={title} className="card-hover" style={{
+              padding:"24px 22px", borderRadius:18,
+              background:"rgba(255,255,255,0.03)", border:"1px solid rgba(255,255,255,0.07)",
+            }}>
+              <div style={{
+                width:42, height:42, borderRadius:12, marginBottom:14,
+                background:"rgba(249,115,22,0.1)",
+                display:"flex", alignItems:"center", justifyContent:"center",
+              }}>
+                <Icon size={20} color="#F97316" />
               </div>
-              <h3 className="font-display font-semibold text-base text-white mb-2">{title}</h3>
-              <p className="text-sm text-white/45 leading-relaxed">{desc}</p>
+              <h3 style={{ fontFamily:"'Sora',sans-serif", fontWeight:700,
+                fontSize:15, color:"#FFFFFF", marginBottom:6 }}>{title}</h3>
+              <p style={{ fontSize:13, color:"rgba(255,255,255,0.42)", lineHeight:1.7 }}>{desc}</p>
             </div>
           ))}
         </div>
 
         {/* CTA strip */}
-        <div className="mt-12 rounded-2xl p-8 flex flex-col md:flex-row items-center justify-between gap-5"
-          style={{background:"#F59E0B"}}>
+        <div style={{
+          marginTop:48, borderRadius:20,
+          background:"linear-gradient(135deg,rgba(249,115,22,0.15),rgba(249,115,22,0.05))",
+          border:"1px solid rgba(249,115,22,0.25)",
+          padding:"32px 36px",
+          display:"flex", flexWrap:"wrap", alignItems:"center", justifyContent:"space-between", gap:20,
+        }}>
           <div>
-            <h3 className="font-display font-bold text-ink text-xl mb-1">Ready to get your website built?</h3>
-            <p className="text-ink/60 text-sm">Let's chat — no pressure, no jargon, just a friendly conversation.</p>
+            <h3 style={{ fontFamily:"'Sora',sans-serif", fontWeight:700, fontSize:20,
+              color:"#FFFFFF", marginBottom:4 }}>
+              Ready to get your website built?
+            </h3>
+            <p style={{ color:"rgba(255,255,255,0.45)", fontSize:14 }}>
+              Let's have a free, no-pressure chat about your project.
+            </p>
           </div>
-          <a href="#contact" className="btn-ghost flex-shrink-0" style={{color:"#07070A", borderColor:"rgba(0,0,0,0.25)"}}>
-            Get a Free Quote →
+          <a href="#contact" className="btn-primary" style={{ flexShrink:0 }}>
+            Get a Free Quote
           </a>
         </div>
       </div>

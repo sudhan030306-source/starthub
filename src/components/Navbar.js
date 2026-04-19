@@ -21,69 +21,73 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", fn);
   }, []);
 
-  return (
-    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-      scrolled
-        ? "bg-ink/85 backdrop-blur-xl border-b border-white/[0.07]"
-        : "bg-transparent"
-    }`}>
-      <div className="max-w-6xl mx-auto flex items-center justify-between h-16 px-6 md:px-10 lg:px-16">
+  const close = () => setMobileOpen(false);
 
-        {/* ── Logo ── */}
-        <a href="#home" className="flex items-center gap-3 group">
-          <div className="relative w-8 h-8 flex-shrink-0">
-            <Image
-              src="/logo.png"
-              alt="StartlyHub Logo"
-              fill
-              className="object-contain"
-              /* invert makes the dark logo marks appear white on dark bg */
-              style={{ filter: "brightness(0) invert(1)" }}
-            />
-          </div>
-          <div className="flex flex-col leading-none">
-            <span className="font-display font-bold text-sm tracking-widest uppercase text-white">
-              Startly<span className="text-gold">Hub</span>
-            </span>
-            <span className="text-[9px] text-white/30 tracking-[0.2em] uppercase font-display font-medium">
-              by Sudhan M
-            </span>
-          </div>
+  return (
+    <header style={{
+      position:"fixed", top:0, left:0, right:0, zIndex:50,
+      transition:"all 0.3s ease",
+      background: scrolled ? "rgba(8,8,15,0.85)" : "transparent",
+      backdropFilter: scrolled ? "blur(16px)" : "none",
+      borderBottom: scrolled ? "1px solid rgba(255,255,255,0.06)" : "none",
+    }}>
+      <div className="container-max" style={{
+        display:"flex", alignItems:"center", justifyContent:"space-between",
+        height:64, padding:"0 24px",
+      }}>
+        {/* Logo — StartlyHub */}
+        <a href="#home" style={{ display:"flex", alignItems:"center", textDecoration:"none" }}>
+          <Image
+            src="/logo.png"
+            alt="StartlyHub"
+            width={120}
+            height={48}
+            style={{
+              objectFit:"contain",
+              /* Invert the dark logo to white so it reads on the dark navbar */
+              filter: "invert(1) brightness(2)",
+              height: 40,
+              width: "auto",
+            }}
+            priority
+          />
         </a>
 
-        {/* ── Desktop nav ── */}
-        <nav className="hidden md:flex items-center gap-8">
-          {NAV_LINKS.map(l => (
-            <a key={l.href} href={l.href} className="nav-l">{l.label}</a>
+        {/* Desktop nav */}
+        <nav style={{ display:"flex", alignItems:"center", gap:32 }} className="hidden md:flex">
+          {NAV_LINKS.map((l) => (
+            <a key={l.href} href={l.href} className="nav-link">{l.label}</a>
           ))}
         </nav>
 
-        {/* ── CTA ── */}
-        <a href="#contact" className="hidden md:inline-flex btn-gold py-2.5 px-5 text-sm">
-          Get a Website Built
+        {/* Desktop CTA */}
+        <a href="#contact" className="btn-primary hidden md:inline-flex"
+          style={{ padding:"10px 20px", fontSize:14 }}>
+          Let's Work Together
         </a>
 
-        {/* ── Hamburger ── */}
-        <button
-          className="md:hidden text-white/60 p-1"
-          onClick={() => setMobileOpen(!mobileOpen)}
-        >
+        {/* Hamburger */}
+        <button className="md:hidden" onClick={() => setMobileOpen(!mobileOpen)}
+          style={{ color:"#fff", background:"none", border:"none", cursor:"pointer", padding:8 }}>
           {mobileOpen ? <X size={22}/> : <Menu size={22}/>}
         </button>
       </div>
 
-      {/* ── Mobile menu ── */}
+      {/* Mobile menu */}
       {mobileOpen && (
-        <div className="md:hidden border-t border-white/[0.07] px-6 py-5 flex flex-col gap-4 animate-fade-in"
-          style={{ background: "#0C0C10" }}>
-          {NAV_LINKS.map(l => (
-            <a key={l.href} href={l.href} onClick={() => setMobileOpen(false)}
-              className="text-sm text-white/60 py-1.5 border-b border-white/[0.07] font-display">
+        <div style={{
+          background:"rgba(8,8,15,0.97)", borderTop:"1px solid rgba(255,255,255,0.06)",
+          padding:"16px 24px", display:"flex", flexDirection:"column", gap:16,
+        }} className="md:hidden">
+          {NAV_LINKS.map((l) => (
+            <a key={l.href} href={l.href} onClick={close}
+              style={{ fontSize:15, color:"rgba(255,255,255,0.75)", fontWeight:500, textDecoration:"none" }}>
               {l.label}
             </a>
           ))}
-          <a href="#contact" onClick={() => setMobileOpen(false)} className="btn-gold justify-center mt-1">
-            Get a Website Built
+          <a href="#contact" onClick={close} className="btn-primary"
+            style={{ justifyContent:"center", marginTop:8 }}>
+            Let's Work Together
           </a>
         </div>
       )}

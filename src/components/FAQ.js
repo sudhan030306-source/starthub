@@ -3,34 +3,51 @@ import { useState } from "react";
 import { Plus, Minus } from "lucide-react";
 
 const FAQS = [
-  { q:"How much does a website cost?",           a:"Since every business is different, pricing is tailored to your specific needs. There are no fixed packages — just an honest quote based on what you actually require. Contact me and I'll get back to you within 24 hours with a clear estimate." },
-  { q:"How long will it take to build?",          a:"A basic site typically takes 7–10 days, and a business website around 10–14 days. The timeline depends on content readiness and revision rounds. I'll give you a clear estimate before we start." },
-  { q:"Can you redesign my existing website?",    a:"Yes! If you have an outdated or underperforming website, I can redesign it with a modern look, better speed, and improved user experience." },
-  { q:"Will the website work on mobile phones?",  a:"Absolutely — every site I build is mobile-first and fully responsive. Phones, tablets, desktops. This is a standard feature, not an extra." },
-  { q:"Do I need technical knowledge to manage it?", a:"Not at all. I build easy-to-manage websites and walk you through how to update basic content. I'm available if you need help later too." },
-  { q:"What do you need from me to get started?", a:"Just a brief description of your business and what you need, some reference sites you like (optional), and any text or images you want. I'll help you structure the rest." },
-  { q:"Do you help with hosting and domain?",     a:"Yes — I guide you to affordable hosting and domain options and help set everything up. Those costs are separate from my development fee, but I'll recommend the best value options." },
-  { q:"What if I'm not happy with the design?",   a:"I include revision rounds in every project and share a live preview before final delivery so we can refine things together. Your satisfaction is the goal." },
+  { q:"How much does a website cost?",
+    a:"Every business is different, and so is the pricing. Rather than fixed packages, I give you a custom quote based on what you actually need — number of pages, features, and timeline. First consultation is free and there's no pressure." },
+  { q:"How long will it take to build my website?",
+    a:"A simple website typically takes 7–10 days, and a more complete business site around 10–14 days. The timeline depends on how quickly we finalise content and design. I'll give you a clear estimate before starting." },
+  { q:"Can you redesign my existing website?",
+    a:"Yes! If your current website looks outdated or isn't working well, I can redesign it with a modern, clean look and better user experience. I'll review your existing site and suggest practical improvements." },
+  { q:"Will the website work well on mobile phones?",
+    a:"Absolutely. Every website I build is mobile-first and fully responsive — it will look and function great on phones, tablets, and desktops. This is a standard feature, not an extra." },
+  { q:"Do I need technical knowledge to manage my site?",
+    a:"Not at all. I build easy-to-manage websites and walk you through how to update basic content like text and images. If you need regular updates, I can help with that too at a small maintenance fee." },
+  { q:"What do you need from me to get started?",
+    a:"Just a brief description of what you need, your business name, some reference sites you like (optional), and any text or images you want on the site. I'll help you organize and structure everything else." },
+  { q:"Do you provide hosting and domain registration?",
+    a:"I guide you to the most affordable hosting and domain options and help you set everything up. Hosting and domain costs are separate from development — but I'll recommend the best cost-effective choices." },
+  { q:"What if I'm not happy with the design?",
+    a:"Revisions are included in every project. I share a live preview before final delivery so you can give feedback and we make changes together. Your satisfaction is what matters." },
 ];
 
-function Item({ q, a, open, onToggle }) {
+function FAQItem({ q, a, open, toggle }) {
   return (
-    <div className={`rounded-xl overflow-hidden transition-all duration-200 ${
-      open
-        ? "border border-gold/30 bg-gold/5"
-        : "border border-white/[0.07] glass"
-    }`}>
-      <button className="w-full flex items-center justify-between gap-4 px-5 py-4 text-left" onClick={onToggle}>
-        <span className="font-display font-semibold text-sm md:text-base text-white">{q}</span>
-        <span className={`flex-shrink-0 w-7 h-7 rounded-lg flex items-center justify-center transition-colors ${
-          open ? "bg-gold text-ink" : "bg-white/5 text-white/40"
-        }`}>
-          {open ? <Minus size={13}/> : <Plus size={13}/>}
+    <div style={{
+      borderRadius:14, overflow:"hidden",
+      border: open ? "1px solid rgba(249,115,22,0.25)" : "1px solid rgba(255,255,255,0.07)",
+      background: open ? "rgba(249,115,22,0.06)" : "rgba(255,255,255,0.02)",
+      transition:"all 0.2s ease",
+    }}>
+      <button onClick={toggle} style={{
+        width:"100%", display:"flex", alignItems:"center", justifyContent:"space-between",
+        gap:16, padding:"18px 20px", textAlign:"left", background:"none", border:"none",
+        cursor:"pointer",
+      }}>
+        <span style={{ fontFamily:"'Sora',sans-serif", fontWeight:600,
+          fontSize:14, color:"#FFFFFF", lineHeight:1.4 }}>{q}</span>
+        <span style={{
+          flexShrink:0, width:28, height:28, borderRadius:8,
+          background: open ? "#F97316" : "rgba(255,255,255,0.07)",
+          display:"flex", alignItems:"center", justifyContent:"center",
+          transition:"background 0.2s ease",
+        }}>
+          {open ? <Minus size={13} color="#fff"/> : <Plus size={13} color="rgba(255,255,255,0.6)"/>}
         </span>
       </button>
       {open && (
-        <div className="px-5 pb-5">
-          <p className="text-sm text-white/45 leading-relaxed">{a}</p>
+        <div style={{ padding:"0 20px 18px" }}>
+          <p style={{ fontSize:14, color:"rgba(255,255,255,0.5)", lineHeight:1.8 }}>{a}</p>
         </div>
       )}
     </div>
@@ -40,27 +57,35 @@ function Item({ q, a, open, onToggle }) {
 export default function FAQ() {
   const [open, setOpen] = useState(0);
   return (
-    <section id="faq" className="section-pad" style={{background:"#090910"}}>
-      <div className="container-c mx-auto">
-        <div className="grid lg:grid-cols-2 gap-12 items-start">
-          <div className="lg:sticky lg:top-24">
-            <div className="label-tag">FAQ</div>
-            <h2 className="font-display font-extrabold text-3xl md:text-4xl text-white mb-4 leading-tight">
+    <section id="faq" className="section-padding" style={{ background:"#08080F" }}>
+      <div className="container-max">
+        <div style={{ display:"grid", gridTemplateColumns:"1fr", gap:48, alignItems:"start" }}
+          className="lg:grid-cols-2">
+
+          {/* Left */}
+          <div className="lg:sticky" style={{ top:96 }}>
+            <span className="section-label">FAQ</span>
+            <h2 style={{ fontFamily:"'Sora',sans-serif", fontWeight:800,
+              fontSize:"clamp(28px,3.5vw,42px)", color:"#FFFFFF", marginBottom:16, lineHeight:1.2 }}>
               Answers to Your Questions
             </h2>
-            <p className="text-white/45 leading-relaxed mb-6">
-              First time getting a website? Totally normal to have questions. Here are the ones I get asked most.
+            <p style={{ color:"rgba(255,255,255,0.45)", lineHeight:1.8, fontSize:15, marginBottom:20 }}>
+              First time getting a website built? Totally normal to have questions.
+              Here are the ones I get asked most often.
             </p>
-            <p className="text-white/40 text-sm">
-              Don't see yours?{" "}
-              <a href="#contact" className="text-gold font-semibold hover:text-amber-300 transition">
-                Just ask me directly →
+            <p style={{ fontSize:14, color:"rgba(255,255,255,0.4)" }}>
+              Don't see your question?{" "}
+              <a href="#contact" style={{ color:"#F97316", fontWeight:600, textDecoration:"none" }}>
+                Ask me directly →
               </a>
             </p>
           </div>
-          <div className="flex flex-col gap-2.5">
-            {FAQS.map((f,i) => (
-              <Item key={i} q={f.q} a={f.a} open={open===i} onToggle={() => setOpen(open===i ? null : i)} />
+
+          {/* Right */}
+          <div style={{ display:"flex", flexDirection:"column", gap:10 }}>
+            {FAQS.map((item, i) => (
+              <FAQItem key={i} q={item.q} a={item.a}
+                open={open===i} toggle={()=>setOpen(open===i ? null : i)} />
             ))}
           </div>
         </div>

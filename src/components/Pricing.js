@@ -1,88 +1,154 @@
 "use client";
-import { ArrowRight, Zap } from "lucide-react";
+import { Check, ArrowRight, MessageCircle } from "lucide-react";
+
+// ── Pricing is intentionally kept custom-only.
+// Every business is different — so is the price. ──────────────────────────────
+
+const WHAT_INCLUDES = [
+  "Mobile-responsive, modern design",
+  "Clean code built with latest tech",
+  "Fast page loading & SEO basics",
+  "Contact / inquiry form setup",
+  "Revisions until you're happy",
+  "Free handover session post-delivery",
+  "Timeline agreed before we start",
+  "No hidden fees — ever",
+];
+
+const FACTORS = [
+  { label: "Number of pages",          desc: "Single page to full multi-page site" },
+  { label: "Features & functionality", desc: "Forms, galleries, booking, shop, etc." },
+  { label: "Design complexity",        desc: "Simple clean vs elaborate custom UI"  },
+  { label: "Timeline",                 desc: "Standard delivery vs rush projects"    },
+];
 
 export default function Pricing() {
   return (
-    <section id="pricing" className="section-pad" style={{background:"#090910"}}>
-      <div className="container-c mx-auto">
+    <section id="pricing" className="section-padding" style={{ background:"#08080F" }}>
+      <div className="container-max">
 
-        <div className="text-center max-w-2xl mx-auto mb-14">
-          <div className="label-tag mx-auto" style={{width:"fit-content"}}>Pricing</div>
-          <h2 className="font-display font-extrabold text-3xl md:text-4xl text-white mb-4">
-            Simple, Honest Pricing
+        <div style={{ textAlign:"center", maxWidth:640, margin:"0 auto 56px" }}>
+          <span className="section-label">Pricing</span>
+          <h2 style={{
+            fontFamily:"'Sora',sans-serif", fontWeight:800,
+            fontSize:"clamp(28px,3.5vw,42px)", color:"#FFFFFF", marginBottom:14, lineHeight:1.2,
+          }}>
+            Priced Around{" "}
+            <span style={{
+              background:"linear-gradient(135deg,#F97316,#FBBF24)",
+              WebkitBackgroundClip:"text", WebkitTextFillColor:"transparent",
+            }}>Your Business</span>
           </h2>
-          <p className="text-white/45 text-lg max-w-xl mx-auto">
-            Every business is different — so is every website. Since every project has unique needs,
-            pricing is tailored to what you actually require.
+          <p style={{ color:"rgba(255,255,255,0.45)", fontSize:15, lineHeight:1.8 }}>
+            Every business has different needs — a one-size pricing table doesn't make sense.
+            Instead of guessing, let's have a quick conversation and I'll give you an honest,
+            transparent quote with no fluff and no pressure.
           </p>
         </div>
 
-        {/* Main custom pricing card */}
-        <div className="max-w-2xl mx-auto">
-          <div className="rounded-3xl p-10 md:p-14 text-center relative overflow-hidden"
-            style={{background:"linear-gradient(135deg,#1A1820 0%,#100E18 100%)", border:"1px solid rgba(245,158,11,0.2)"}}>
+        {/* Main two-column grid */}
+        <div style={{
+          display:"grid", gridTemplateColumns:"1fr", gap:24,
+          maxWidth:900, margin:"0 auto",
+        }} className="lg:grid-cols-2">
 
-            {/* Glow */}
-            <div className="absolute inset-0 pointer-events-none"
-              style={{background:"radial-gradient(ellipse at 50% 0%,rgba(245,158,11,0.06) 0%,transparent 65%)"}} />
-
-            <div className="relative z-10">
-              <div className="w-14 h-14 rounded-2xl mx-auto mb-6 flex items-center justify-center"
-                style={{background:"rgba(245,158,11,0.12)", border:"1px solid rgba(245,158,11,0.25)"}}>
-                <Zap size={24} className="text-gold" />
-              </div>
-
-              <h3 className="font-display font-extrabold text-3xl text-white mb-3">Custom Pricing</h3>
-
-              <p className="text-white/50 leading-relaxed mb-8 max-w-md mx-auto text-base">
-                Since every business has different needs, every project has different requirements —
-                and pricing that reflects exactly that. No padded packages, no paying for features
-                you don't need.
-              </p>
-
-              {/* What's always included */}
-              <div className="glass rounded-2xl p-6 mb-8 text-left" style={{border:"1px solid rgba(255,255,255,0.07)"}}>
-                <p className="font-display font-semibold text-white text-sm mb-4 text-center">What's always included</p>
-                <div className="grid grid-cols-2 gap-3">
-                  {[
-                    "Mobile responsive design",
-                    "Clean modern UI",
-                    "Contact / inquiry form",
-                    "Basic SEO setup",
-                    "Fast loading pages",
-                    "Revision rounds",
-                    "WhatsApp chat button",
-                    "Post-delivery support",
-                  ].map(f => (
-                    <div key={f} className="flex items-center gap-2">
-                      <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{background:"#F59E0B"}} />
-                      <span className="text-xs text-white/55 font-display">{f}</span>
-                    </div>
-                  ))}
+          {/* LEFT — What's always included */}
+          <div style={{
+            borderRadius:24, padding:"36px 32px",
+            background:"rgba(255,255,255,0.03)", border:"1px solid rgba(255,255,255,0.08)",
+          }}>
+            <h3 style={{ fontFamily:"'Sora',sans-serif", fontWeight:700,
+              fontSize:18, color:"#FFFFFF", marginBottom:6 }}>
+              What Every Project Includes
+            </h3>
+            <p style={{ fontSize:13, color:"rgba(255,255,255,0.4)", marginBottom:24 }}>
+              No matter the scope, these come standard with every website I build.
+            </p>
+            <div style={{ display:"flex", flexDirection:"column", gap:12 }}>
+              {WHAT_INCLUDES.map((item) => (
+                <div key={item} style={{ display:"flex", alignItems:"center", gap:10 }}>
+                  <div style={{
+                    width:20, height:20, borderRadius:"50%", flexShrink:0,
+                    background:"rgba(249,115,22,0.15)", border:"1px solid rgba(249,115,22,0.3)",
+                    display:"flex", alignItems:"center", justifyContent:"center",
+                  }}>
+                    <Check size={11} color="#F97316" />
+                  </div>
+                  <span style={{ fontSize:14, color:"rgba(255,255,255,0.7)" }}>{item}</span>
                 </div>
-              </div>
+              ))}
+            </div>
+          </div>
 
-              <p className="text-white/35 text-sm mb-6">
-                Just tell me what you need. I'll give you an honest quote within 24 hours —<br className="hidden md:block" />
-                no pressure, no hidden charges.
+          {/* RIGHT — Factors + CTA */}
+          <div style={{ display:"flex", flexDirection:"column", gap:20 }}>
+
+            {/* Factors card */}
+            <div style={{
+              borderRadius:24, padding:"32px 28px",
+              background:"rgba(249,115,22,0.06)", border:"1px solid rgba(249,115,22,0.18)",
+              flex:1,
+            }}>
+              <h3 style={{ fontFamily:"'Sora',sans-serif", fontWeight:700,
+                fontSize:17, color:"#FFFFFF", marginBottom:6 }}>
+                What Shapes the Price?
+              </h3>
+              <p style={{ fontSize:13, color:"rgba(255,255,255,0.4)", marginBottom:20 }}>
+                These factors determine the final quote — nothing hidden.
               </p>
+              <div style={{ display:"flex", flexDirection:"column", gap:12 }}>
+                {FACTORS.map((f) => (
+                  <div key={f.label} style={{
+                    padding:"12px 14px", borderRadius:12,
+                    background:"rgba(255,255,255,0.04)", border:"1px solid rgba(255,255,255,0.07)",
+                  }}>
+                    <p style={{ fontSize:13, fontFamily:"'Sora',sans-serif",
+                      fontWeight:600, color:"#FFFFFF", marginBottom:2 }}>{f.label}</p>
+                    <p style={{ fontSize:11, color:"rgba(255,255,255,0.38)" }}>{f.desc}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
 
-              <a href="#contact" className="btn-gold text-base px-10 py-4">
-                Get Your Custom Quote <ArrowRight size={16}/>
-              </a>
+            {/* CTA card */}
+            <div style={{
+              borderRadius:20, padding:"24px 28px",
+              background:"linear-gradient(135deg,rgba(249,115,22,0.18),rgba(249,115,22,0.06))",
+              border:"1px solid rgba(249,115,22,0.3)",
+              position:"relative", overflow:"hidden",
+            }}>
+              <div style={{
+                position:"absolute", top:-20, right:-20, width:100, height:100,
+                borderRadius:"50%",
+                background:"radial-gradient(circle, rgba(249,115,22,0.2), transparent 70%)",
+                pointerEvents:"none",
+              }} />
+              <p style={{ fontFamily:"'Sora',sans-serif", fontWeight:700, fontSize:17,
+                color:"#FFFFFF", marginBottom:6 }}>
+                Tell me about your project
+              </p>
+              <p style={{ fontSize:13, color:"rgba(255,255,255,0.55)", marginBottom:20 }}>
+                I'll respond with a clear, no-obligation quote within 24 hours.
+              </p>
+              <div style={{ display:"flex", gap:10, flexWrap:"wrap" }}>
+                <a href="#contact" className="btn-primary" style={{ fontSize:13, padding:"10px 18px" }}>
+                  Get a Quote <ArrowRight size={14}/>
+                </a>
+                <a href="https://wa.me/918807071383" target="_blank" rel="noopener noreferrer"
+                  className="btn-ghost" style={{ fontSize:13, padding:"10px 18px" }}>
+                  <MessageCircle size={14}/> WhatsApp
+                </a>
+              </div>
             </div>
           </div>
         </div>
 
-        {/* Trust row */}
-        <div className="flex flex-wrap items-center justify-center gap-8 mt-12 text-white/30 text-sm">
-          {["No hidden charges", "Free initial consultation", "Pay only for what you need", "Affordable for small businesses"].map(t => (
-            <div key={t} className="flex items-center gap-2">
-              <span className="w-1 h-1 rounded-full bg-gold opacity-60" />
-              <span className="font-display text-xs">{t}</span>
-            </div>
-          ))}
-        </div>
+        {/* Reassurance note */}
+        <p style={{ textAlign:"center", fontSize:12, color:"rgba(255,255,255,0.25)",
+          marginTop:32, maxWidth:480, marginLeft:"auto", marginRight:"auto" }}>
+          First consultation is always free. Pricing is discussed openly and agreed before any work begins.
+          No surprise charges, no pressure.
+        </p>
       </div>
     </section>
   );

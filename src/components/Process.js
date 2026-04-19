@@ -1,44 +1,73 @@
 "use client";
 
 const STEPS = [
-  { n:"01", title:"Tell Me Your Needs",    desc:"A simple call, WhatsApp, or email. You share what you need and I ask a few questions to understand your business and goals.",        day:"Day 1"   },
-  { n:"02", title:"Plan Together",         desc:"I put together a clear plan — pages, design direction, timeline. You'll know exactly what you're getting before we begin.",           day:"Day 2–3" },
-  { n:"03", title:"Build & Review",        desc:"I build and share a live preview. We review together, make changes until you're happy. Transparent throughout.",                      day:"Day 4–10"},
-  { n:"04", title:"Delivery & Support",    desc:"Once approved, the website goes live. I hand over everything and provide basic support so you know how to manage your site.",         day:"Day 10–14"},
+  { n:"01", title:"Tell Me Your Needs",      desc:"A simple conversation — call, WhatsApp, or email. Tell me what you need and I ask a few questions to understand your business and goals.", time:"Day 1"    },
+  { n:"02", title:"Plan Your Website",        desc:"I put together a clear plan: pages, design direction, and timeline. You'll know exactly what you're getting before we begin.",             time:"Day 2–3"  },
+  { n:"03", title:"Build & Review Together",  desc:"I build and share a live preview for your feedback. We review, revise until you're happy — fully transparent throughout.",                 time:"Day 4–10" },
+  { n:"04", title:"Delivery & Support",       desc:"Once approved, your site goes live. I provide a handover session so you know how to manage it. No hidden extras.",                         time:"Day 10–14"},
 ];
 
 export default function Process() {
   return (
-    <section className="section-pad bg-ink">
-      <div className="container-c mx-auto">
-        <div className="text-center max-w-2xl mx-auto mb-14">
-          <div className="label-tag mx-auto" style={{width:"fit-content"}}>How I Work</div>
-          <h2 className="font-display font-extrabold text-3xl md:text-4xl text-white mb-4">
+    <section id="process" className="section-padding" style={{ background:"#0D0D1A" }}>
+      <div className="container-max">
+        <div style={{ textAlign:"center", maxWidth:600, margin:"0 auto 56px" }}>
+          <span className="section-label">How I Work</span>
+          <h2 style={{ fontFamily:"'Sora',sans-serif", fontWeight:800,
+            fontSize:"clamp(28px,3.5vw,42px)", color:"#FFFFFF", marginBottom:14, lineHeight:1.2 }}>
             A Simple, Stress-Free Process
           </h2>
-          <p className="text-white/45 text-lg">
-            From first message to live website — here's exactly what to expect. No surprises.
+          <p style={{ color:"rgba(255,255,255,0.45)", fontSize:15, lineHeight:1.75 }}>
+            From first message to final website — here's exactly how we'll work together. No surprises.
           </p>
         </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fill,minmax(240px,1fr))", gap:20, position:"relative" }}>
           {STEPS.map((s, i) => (
-            <div key={s.n} className="glass glow-hover rounded-2xl p-6" style={{border:"1px solid rgba(255,255,255,0.07)"}}>
-              <div className="flex items-center justify-between mb-5">
-                <span className="w-10 h-10 rounded-xl flex items-center justify-center font-display font-bold text-sm"
-                  style={{background:"#F59E0B", color:"#07070A"}}>{s.n}</span>
-                <span className="text-[10px] font-display font-semibold text-white/30 bg-white/5 border border-white/10 px-2.5 py-1 rounded-lg">
-                  {s.day}
+            <div key={s.n} className="card-hover" style={{
+              borderRadius:20, padding:"28px 24px",
+              background:"rgba(255,255,255,0.03)", border:"1px solid rgba(255,255,255,0.07)",
+              position:"relative",
+            }}>
+              {/* Step number */}
+              <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center", marginBottom:16 }}>
+                <div style={{
+                  width:40, height:40, borderRadius:12,
+                  background:"rgba(249,115,22,0.15)", border:"1px solid rgba(249,115,22,0.25)",
+                  display:"flex", alignItems:"center", justifyContent:"center",
+                  fontFamily:"'Sora',sans-serif", fontWeight:800, fontSize:13, color:"#F97316",
+                }}>
+                  {s.n}
+                </div>
+                <span style={{
+                  fontSize:10, fontFamily:"'Sora',sans-serif", fontWeight:600,
+                  color:"rgba(255,255,255,0.3)", background:"rgba(255,255,255,0.05)",
+                  border:"1px solid rgba(255,255,255,0.08)",
+                  padding:"3px 8px", borderRadius:6,
+                }}>
+                  {s.time}
                 </span>
               </div>
-              <h3 className="font-display font-bold text-base text-white mb-2">{s.title}</h3>
-              <p className="text-sm text-white/40 leading-relaxed">{s.desc}</p>
+              <h3 style={{ fontFamily:"'Sora',sans-serif", fontWeight:700,
+                fontSize:15, color:"#FFFFFF", marginBottom:8 }}>{s.title}</h3>
+              <p style={{ fontSize:13, color:"rgba(255,255,255,0.42)", lineHeight:1.7 }}>{s.desc}</p>
+
+              {/* Connector arrow (desktop) */}
+              {i < STEPS.length - 1 && (
+                <div style={{
+                  position:"absolute", right:-12, top:"50%", transform:"translateY(-50%)",
+                  width:22, height:22, borderRadius:"50%",
+                  background:"rgba(255,255,255,0.05)", border:"1px solid rgba(255,255,255,0.1)",
+                  display:"flex", alignItems:"center", justifyContent:"center",
+                  fontSize:11, color:"rgba(249,115,22,0.6)", zIndex:1,
+                }} className="hidden lg:flex">→</div>
+              )}
             </div>
           ))}
         </div>
 
-        <p className="text-center text-xs text-white/25 mt-6">
-          ✦ Timeline varies by project complexity. Custom timelines available on request.
+        <p style={{ textAlign:"center", fontSize:12, color:"rgba(255,255,255,0.25)", marginTop:24 }}>
+          ✦ Timeline varies with project complexity. Custom timelines available.
         </p>
       </div>
     </section>
