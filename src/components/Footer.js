@@ -1,5 +1,5 @@
 "use client";
-import { Github, Linkedin, Twitter, Instagram, Mail, ArrowUpRight } from "lucide-react";
+import { Github, Linkedin, Mail, ArrowUpRight } from "lucide-react";
 import Image from "next/image";
 
 const QUICK_LINKS = [
@@ -8,7 +8,6 @@ const QUICK_LINKS = [
   { label:"My Work",  href:"#projects" },
   { label:"Process",  href:"#process"  },
   { label:"Pricing",  href:"#pricing"  },
-  { label:"FAQ",      href:"#faq"      },
   { label:"Contact",  href:"#contact"  },
 ];
 
@@ -20,8 +19,7 @@ const SERVICE_LINKS = [
 // ── Update these with your real social URLs ───────────────────────────────
 const SOCIALS = [
   { icon: Github,    href:"https://github.com/yourusername",    label:"GitHub"    },
-  { icon: Linkedin,  href:"https://linkedin.com/in/yourusername",label:"LinkedIn"  },
-  { icon: Twitter,   href:"https://twitter.com/yourusername",   label:"Twitter"   },
+  { icon: Linkedin,  href:"www.linkedin.com/in/sudhan0303",label:"LinkedIn"  },
   { icon: Instagram, href:"https://instagram.com/yourusername", label:"Instagram" },
 ];
 
