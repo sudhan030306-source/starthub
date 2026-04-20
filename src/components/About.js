@@ -146,7 +146,7 @@ export default function About() {
               ))}
             </div>
 
-            <a href="#contact" className="btn-primary" style={{ fontSize:14 }}>
+            <a href="/contact" className="btn-primary" style={{ fontSize:14 }}>
               Let's Build Something <ArrowRight size={15}/>
             </a>
           </div>

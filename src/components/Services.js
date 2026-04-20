@@ -80,7 +80,7 @@ export default function Services() {
               <p style={{ fontSize:13, color:"rgba(255,255,255,0.45)", lineHeight:1.7, marginBottom:16 }}>
                 {desc}
               </p>
-              <a href="#contact" style={{
+              <a href="/contact" style={{
                 fontSize:13, fontFamily:"'Sora',sans-serif", fontWeight:600,
                 color:"#F97316", textDecoration:"none",
               }}>
@@ -94,7 +94,7 @@ export default function Services() {
           <p style={{ color:"rgba(255,255,255,0.4)", marginBottom:16, fontSize:14 }}>
             Not sure which service fits your needs?
           </p>
-          <a href="#contact" className="btn-primary">Tell Me About Your Project</a>
+          <a href="/contact" className="btn-primary">Tell Me About Your Project</a>
         </div>
       </div>
     </section>

@@ -70,7 +70,7 @@ export default function WhyChooseMe() {
               Let's have a free, no-pressure chat about your project.
             </p>
           </div>
-          <a href="#contact" className="btn-primary" style={{ flexShrink:0 }}>
+          <a href="/contact" className="btn-primary" style={{ flexShrink:0 }}>
             Get a Free Quote
           </a>
         </div>

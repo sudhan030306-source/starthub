@@ -22,7 +22,7 @@ const PROJECTS = [
     gradFrom: "rgba(249,115,22,0.12)",
     gradTo:   "rgba(249,115,22,0.03)",
     borderColor: "rgba(249,115,22,0.25)",
-    cta: { label: "Get Your Website Built", href: "#contact" },
+    cta: { label: "Get Your Website Built", href: "/contact" },
     featured: true,
   },
   {
@@ -44,7 +44,7 @@ const PROJECTS = [
     gradFrom: "rgba(96,165,250,0.10)",
     gradTo:   "rgba(96,165,250,0.02)",
     borderColor: "rgba(96,165,250,0.20)",
-    cta: { label: "Discuss a Dashboard", href: "#contact" },
+    cta: { label: "Discuss a Dashboard", href: "/contact" },
     featured: false,
   },
   {
@@ -219,7 +219,7 @@ export default function Projects() {
           <p style={{ color:"rgba(255,255,255,0.4)", fontSize:14, marginBottom:20 }}>
             Let's talk about what you need — free consultation, no pressure.
           </p>
-          <a href="#contact" className="btn-primary">Start a Conversation</a>
+          <a href="/contact" className="btn-primary">Start a Conversation</a>
         </div>
       </div>
     </section>

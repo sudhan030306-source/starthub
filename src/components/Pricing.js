@@ -131,7 +131,7 @@ export default function Pricing() {
                 I'll respond with a clear, no-obligation quote within 24 hours.
               </p>
               <div style={{ display:"flex", gap:10, flexWrap:"wrap" }}>
-                <a href="#contact" className="btn-primary" style={{ fontSize:13, padding:"10px 18px" }}>
+                <a href="/contact" className="btn-primary" style={{ fontSize:13, padding:"10px 18px" }}>
                   Get a Quote <ArrowRight size={14}/>
                 </a>
                 <a href="https://wa.me/918807071383" target="_blank" rel="noopener noreferrer"

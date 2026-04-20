@@ -1,13 +1,13 @@
 import "./globals.css";
 
 export const metadata = {
-  title: "StartlyHub | Affordable Websites for Businesses & Personal Brands",
+  title: "Sudhan M | Affordable Websites for Businesses & Personal Brands",
   description:
     "I build clean, modern, and affordable websites for small businesses, local shops, startups, and freelancers.",
   keywords: "affordable websites, freelance web developer, small business website, portfolio website, landing page, India",
   metadataBase: new URL("https://sudhanm.dev"),
   openGraph: {
-    title: "StratlyHub | Affordable Web Development",
+    title: "Sudhan M | Affordable Web Development",
     description: "Clean, modern, affordable websites for businesses and personal brands.",
     type: "website",
   },
