@@ -53,7 +53,7 @@ export default function Footer() {
             <Link href="/contact" className="btn-primary" style={{ fontSize:14 }}>
               Start a Project <ArrowUpRight size={14}/>
             </Link>
-            <a href="mailto:stratlyhub@gmail.com" className="btn-ghost" style={{ fontSize:14 }}>
+            <a href="https://mail.google.com/mail/?view=cm&to=stratlyhub@gmail.com" target="_blank" rel="noopener noreferrer" className="btn-ghost" style={{ fontSize:14 }}>
               <Mail size={14}/> Email Me
             </a>
           </div>
@@ -167,7 +167,7 @@ export default function Footer() {
                   letterSpacing:"0.06em", textTransform:"uppercase", marginBottom:3 }}>
                   Email
                 </p>
-                <a href="mailto:stratlyhub@gmail.com" style={{ fontSize:12,
+                <a href="https://mail.google.com/mail/?view=cm&to=stratlyhub@gmail.com" target="_blank" rel="noopener noreferrer" style={{ fontSize:12,
                   color:"rgba(255,255,255,0.5)", textDecoration:"none" }}>
                   stratlyhub@gmail.com
                 </a>

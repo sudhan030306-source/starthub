@@ -4,9 +4,10 @@ import { Mail, MessageCircle, MapPin, Send, CheckCircle } from "lucide-react";
 
 // ── CONTACT DETAILS ────────────────────────────────────────────────────────
 const CONTACT = {
-  email:    "stratlyhub@gmail.com",
-  whatsapp: "918807071383",
-  location: "India (Remote & Local)",
+  email:      "stratlyhub@gmail.com",
+  emailUrl:   "https://mail.google.com/mail/?view=cm&to=stratlyhub@gmail.com",
+  whatsapp:   "918807071383",
+  location:   "India (Remote & Local)",
 };
 
 const SERVICE_OPTIONS = [
@@ -52,7 +53,7 @@ export default function Contact() {
           {/* Info cards */}
           <div className="lg:col-span-2" style={{ display:"flex", flexDirection:"column", gap:14 }}>
             {/* Email */}
-            <a href={`mailto:${CONTACT.email}`} className="card-hover" style={{
+            <a href={CONTACT.emailUrl} target="_blank" rel="noopener noreferrer" className="card-hover" style={{
               display:"flex", alignItems:"center", gap:14, padding:"18px 18px",
               background:"rgba(255,255,255,0.03)", border:"1px solid rgba(255,255,255,0.08)",
               borderRadius:16, textDecoration:"none",
