@@ -33,7 +33,7 @@ export default function Contact() {
       // ── FORMSPREE: replace the URL below with your own endpoint ──────────────
       // 1. Go to formspree.io → sign up free → New Form → copy your endpoint
       // 2. Replace "https://formspree.io/f/YOUR_FORM_ID" with your real URL
-      const res = await fetch("https://formspree.io/f/YOUR_FORM_ID", {
+      const res = await fetch("https://formspree.io/f/xqewlwgz", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
