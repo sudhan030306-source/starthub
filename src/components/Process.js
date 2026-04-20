@@ -1,7 +1,7 @@
 "use client";
 
 const STEPS = [
-  { n:"01", title:"Tell Me Your Needs",      desc:"A simple conversation — call, WhatsApp, or email. Tell me what you need and I ask a few questions to understand your business and goals.", time:"Day 1"    },
+  { n:"01", title:"Tell Me Your Needs",      desc:"A simple conversation — call or email. Tell me what you need and I ask a few questions to understand your business and goals.", time:"Day 1"    },
   { n:"02", title:"Plan Your Website",        desc:"I put together a clear plan: pages, design direction, and timeline. You'll know exactly what you're getting before we begin.",             time:"Day 2–3"  },
   { n:"03", title:"Build & Review Together",  desc:"I build and share a live preview for your feedback. We review, revise until you're happy — fully transparent throughout.",                 time:"Day 4–10" },
   { n:"04", title:"Delivery & Support",       desc:"Once approved, your site goes live. I provide a handover session so you know how to manage it. No hidden extras.",                         time:"Day 10–14"},

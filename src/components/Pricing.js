@@ -1,5 +1,5 @@
 "use client";
-import { Check, ArrowRight, MessageCircle } from "lucide-react";
+import { Check, ArrowRight } from "lucide-react";
 
 // ── Pricing is intentionally kept custom-only.
 // Every business is different — so is the price. ──────────────────────────────
@@ -133,10 +133,6 @@ export default function Pricing() {
               <div style={{ display:"flex", gap:10, flexWrap:"wrap" }}>
                 <a href="/contact" className="btn-primary" style={{ fontSize:13, padding:"10px 18px" }}>
                   Get a Quote <ArrowRight size={14}/>
-                </a>
-                <a href="https://wa.me/918807071383" target="_blank" rel="noopener noreferrer"
-                  className="btn-ghost" style={{ fontSize:13, padding:"10px 18px" }}>
-                  <MessageCircle size={14}/> WhatsApp
                 </a>
               </div>
             </div>

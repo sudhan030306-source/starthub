@@ -10,7 +10,7 @@ const TESTIMONIALS = [
   {
     name:"Rajan Mehta", role:"Freelance Consultant", initials:"RM",
     gradFrom:"#1D4ED8", gradTo:"#7C3AED", stars:5,
-    review:"I needed a clean portfolio site quickly. Sudhan delivered a professional, modern website within 10 days and was available on WhatsApp throughout. The pricing was very fair and the final result was better than expected. Highly recommended for anyone on a budget.",
+    review:"I needed a clean portfolio site quickly. Sudhan delivered a professional, modern website within 10 days and was very responsive over email throughout. The pricing was very fair and the final result was better than expected. Highly recommended for anyone on a budget.",
   },
   {
     name:"Ankit Desai", role:"Co-founder, LocalBite Tiffin Services", initials:"AD",
