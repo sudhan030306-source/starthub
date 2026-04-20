@@ -20,16 +20,41 @@ export default function Contact() {
   const [form, setForm] = useState({ name:"", email:"", service:"", message:"" });
   const [submitted, setSubmitted] = useState(false);
   const [loading,   setLoading]   = useState(false);
+  const [error,     setError]     = useState("");
 
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    // ── Replace this with Formspree / EmailJS / API route ──────────
-    await new Promise(r => setTimeout(r, 1200));
-    setLoading(false);
-    setSubmitted(true);
+    setError("");
+
+    try {
+      // ── FORMSPREE: replace the URL below with your own endpoint ──────────────
+      // 1. Go to formspree.io → sign up free → New Form → copy your endpoint
+      // 2. Replace "https://formspree.io/f/YOUR_FORM_ID" with your real URL
+      const res = await fetch("https://formspree.io/f/YOUR_FORM_ID", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name:    form.name,
+          email:   form.email,
+          service: form.service || "Not specified",
+          message: form.message,
+        }),
+      });
+
+      if (res.ok) {
+        setSubmitted(true);
+      } else {
+        const data = await res.json();
+        setError(data?.errors?.[0]?.message || "Something went wrong. Please try WhatsApp or email directly.");
+      }
+    } catch (err) {
+      setError("Network error. Please try WhatsApp or email directly.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -191,6 +216,17 @@ export default function Contact() {
                     placeholder="Briefly describe your business, what kind of website you need, and any specific requirements or questions..."
                     className="input-dark" style={{ resize:"none" }} />
                 </div>
+
+                {/* Error message */}
+                {error && (
+                  <div style={{
+                    padding:"12px 16px", borderRadius:10,
+                    background:"rgba(239,68,68,0.08)", border:"1px solid rgba(239,68,68,0.25)",
+                    fontSize:13, color:"#FCA5A5", lineHeight:1.6,
+                  }}>
+                    ⚠ {error}
+                  </div>
+                )}
 
                 <button type="submit" disabled={loading} className="btn-primary"
                   style={{ justifyContent:"center",padding:"14px",marginTop:4,
